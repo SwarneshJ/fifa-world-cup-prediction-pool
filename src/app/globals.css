@@ -1,26 +1,186 @@
 @import "tailwindcss";
 
+@theme {
+  --color-slate-50: var(--slate-50);
+  --color-slate-100: var(--slate-100);
+  --color-slate-200: var(--slate-200);
+  --color-slate-250: var(--slate-250);
+  --color-slate-300: var(--slate-300);
+  --color-slate-350: var(--slate-350);
+  --color-slate-400: var(--slate-400);
+  --color-slate-450: var(--slate-450);
+  --color-slate-500: var(--slate-500);
+  --color-slate-550: var(--slate-550);
+  --color-slate-600: var(--slate-600);
+  --color-slate-650: var(--slate-650);
+  --color-slate-700: var(--slate-700);
+  --color-slate-800: var(--slate-800);
+  --color-slate-850: var(--slate-850);
+  --color-slate-900: var(--slate-900);
+  --color-slate-950: var(--slate-950);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f0fbf4;     /* Very light grass green background */
+  --foreground: #062f17;     /* High contrast deep green text */
+  --card-bg: #ffffff;
+  --card-border: #bbf7d0;    /* Vibrant emerald-200 border */
+  --input-bg: #ffffff;
+  --input-border: #86efac;
+  --header-bg: rgba(240, 251, 244, 0.85);
+  --header-border: #bbf7d0;
+  --nav-bg: rgba(240, 251, 244, 0.85);
+  --nav-border: #bbf7d0;
+  --marquee-bg: #d1fae5;
+  --marquee-border: #bbf7d0;
+
+  /* Theme color mappings for Light Mode */
+  --slate-50: #f0fbf4;
+  --slate-100: #e6f7ed;
+  --slate-200: #bbf7d0;
+  --slate-250: #86efac;
+  --slate-300: #4ade80;
+  --slate-350: #22c55e;
+  --slate-400: #16a34a;
+  --slate-450: #15803d;
+  --slate-500: #14532d;
+  --slate-550: #14532d;
+  --slate-600: #166534;
+  --slate-650: #14532d;
+  --slate-700: #0f4625;
+  --slate-800: #062f17;
+  --slate-850: #052c1e;
+  --slate-900: #031c12;
+  --slate-950: #01140c;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+:root.dark {
+  --background: #010a07;     /* Deep pitch-green stadium dark background */
+  --foreground: #ecfdf5;     /* High contrast off-white green text */
+  --card-bg: rgba(2, 26, 17, 0.7);
+  --card-border: rgba(16, 185, 129, 0.25);
+  --input-bg: #010f0a;
+  --input-border: #064e3b;
+  --header-bg: rgba(2, 18, 10, 0.85);
+  --header-border: rgba(16, 185, 129, 0.25);
+  --nav-bg: rgba(2, 18, 10, 0.85);
+  --nav-border: rgba(16, 185, 129, 0.25);
+  --marquee-bg: #032516;
+  --marquee-border: #064e3b;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Theme color mappings for Dark Mode */
+  --slate-50: #ecfdf5;
+  --slate-100: #d1fae5;
+  --slate-200: #10b981;
+  --slate-250: rgba(16, 185, 129, 0.25);
+  --slate-300: #34d399;
+  --slate-350: #10b981;
+  --slate-400: #059669;
+  --slate-450: #10b981;
+  --slate-500: #a7f3d0;
+  --slate-550: #34d399;
+  --slate-600: #064e3b;
+  --slate-650: #047857;
+  --slate-700: #022c22;
+  --slate-800: #064e3b;
+  --slate-850: rgba(6, 78, 59, 0.4);
+  --slate-900: #021a11;
+  --slate-950: #010f0a;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Glassmorphism utility card styling */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Theme-aware header and bottom nav */
+header {
+  background: var(--header-bg) !important;
+  border-color: var(--header-border) !important;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+nav {
+  background: var(--nav-bg) !important;
+  border-color: var(--nav-border) !important;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Input styles */
+input, select, textarea {
+  background-color: var(--input-bg) !important;
+  border-color: var(--input-border) !important;
+  color: var(--foreground) !important;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: rgba(16, 185, 129, 0.8) !important;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--input-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Scrolling marquee at the bottom */
+.marquee-container {
+  background: var(--marquee-bg);
+  border-top: 1px solid var(--marquee-border);
+  height: 28px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 64px; /* Just above bottom nav (64px / h-16) */
+  left: 0;
+  right: 0;
+  z-index: 40;
+  max-width: 36rem; /* 576px (max-w-xl) */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 25s linear infinite;
+  padding-left: 100%;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
 }

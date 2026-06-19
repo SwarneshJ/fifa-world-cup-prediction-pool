@@ -1,0 +1,4 @@
+export const SCORING_CONFIG = {
+  CORRECT_OUTCOME: 1,
+  EXACT_SCORE_BONUS: 0,
+};
