@@ -81,6 +81,12 @@ export async function submitPrediction(
     }
   }
 
+  // Voting opens 24 hours before kickoff
+  const openTime = new Date(kickoff.getTime() - 24 * 60 * 60 * 1000);
+  if (now < openTime) {
+    throw new Error('Voting is not open yet. It opens 24 hours before kickoff.');
+  }
+
   if (now >= kickoff && !isMatchActiveForPrivilege) {
     throw new Error('Match has already kicked off and is locked.');
   }

@@ -150,6 +150,13 @@ export default function TodayClient({
 
     const now = getNow();
     const kickoff = new Date(match.kickoffAt);
+    
+    // Voting opens 24 hours before kickoff
+    const openTime = new Date(kickoff.getTime() - 24 * 60 * 60 * 1000);
+    if (now < openTime) {
+      alert('Voting is not open yet! It opens 24 hours before kickoff.');
+      return;
+    }
     let isPrivilegeWindow = false;
 
     if (
@@ -302,6 +309,7 @@ export default function TodayClient({
               }
             }
 
+            const isNotOpenYet = now.getTime() < kickoffTime.getTime() - 24 * 60 * 60 * 1000;
             const isLocked = (now >= kickoffTime && !isPrivilegeGrace) || match.isLockedManually;
 
             const matchPredictions = predictions.filter((p) => p.matchId === match.id);
@@ -333,7 +341,11 @@ export default function TodayClient({
                       </span>
                     )}
 
-                    {isLocked ? (
+                    {isNotOpenYet ? (
+                      <span className="text-[9px] bg-slate-100 text-slate-500 font-extrabold uppercase tracking-widest px-2 py-0.5 rounded border border-slate-250 shadow-sm">
+                        Not Open
+                      </span>
+                    ) : isLocked ? (
                       <span className="text-[9px] bg-slate-200 dark:bg-slate-950 text-slate-600 dark:text-slate-400 font-extrabold uppercase tracking-widest px-2 py-0.5 rounded border border-slate-300 dark:border-slate-900 shadow-sm">
                         Locked
                       </span>
@@ -402,7 +414,11 @@ export default function TodayClient({
                 </div>
 
                 {/* Voting Area */}
-                {!isLocked ? (
+                {isNotOpenYet ? (
+                  <div className="text-center py-4 bg-slate-50 border border-dashed border-slate-200 rounded-xl text-slate-500 text-xs font-bold uppercase tracking-wider">
+                    Voting opens 24h before match starts
+                  </div>
+                ) : !isLocked ? (
                   <div className="space-y-3 bg-slate-100 dark:bg-slate-950/40 p-3 rounded-xl border border-slate-250 dark:border-slate-900">
                     <div className="text-[10px] text-slate-600 dark:text-emerald-400 font-extrabold uppercase tracking-widest mb-1 text-center flex items-center justify-center gap-1.5">
                       Your Prediction

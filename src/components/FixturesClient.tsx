@@ -96,6 +96,13 @@ export default function FixturesClient({
     // Check special privilege parameters
     const now = getNow();
     const kickoff = new Date(match.kickoffAt);
+    
+    // Voting opens 24 hours before kickoff
+    const openTime = new Date(kickoff.getTime() - 24 * 60 * 60 * 1000);
+    if (now < openTime) {
+      alert('Voting is not open yet! It opens 24 hours before kickoff.');
+      return;
+    }
     let isPrivilegeWindow = false;
 
     if (
@@ -285,6 +292,7 @@ export default function FixturesClient({
               }
             }
 
+            const isNotOpenYet = now.getTime() < kickoffTime.getTime() - 24 * 60 * 60 * 1000;
             const isLocked = (now >= kickoffTime && !isPrivilegeGrace) || match.isLockedManually;
             const userPick = localPreds[match.id]?.pick;
 
@@ -340,7 +348,11 @@ export default function FixturesClient({
                 </div>
 
                 {/* Vote layout (Country Names on buttons) */}
-                {!isLocked ? (
+                {isNotOpenYet ? (
+                  <div className="text-center py-2 bg-slate-50 border border-dashed border-slate-200 rounded-xl text-slate-500 text-[10px] font-bold uppercase tracking-wider">
+                    Voting opens 24h before match starts
+                  </div>
+                ) : !isLocked ? (
                   <div className="space-y-2.5 pt-1">
                     {isMatchKnockout ? (
                       <div className="grid grid-cols-2 gap-2">
