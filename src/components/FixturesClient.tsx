@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { submitPrediction } from '@/app/actions';
 import { getTeamFlagUrl } from '@/lib/flags';
-import { Clock, Search, EyeOff } from 'lucide-react';
+import { Clock, Search } from 'lucide-react';
 
 interface Match {
   id: number;
@@ -18,8 +18,6 @@ interface Match {
   winner: string | null;
   finished: boolean;
   isLockedManually: boolean;
-  isAnonymous: boolean;
-  anonymityRequested: boolean;
 }
 
 interface Prediction {
@@ -44,7 +42,6 @@ interface FixturesClientProps {
   users: User[];
   currentUserId: number;
   settings: {
-    anonymousMode: boolean;
     exactScoreBonus: boolean;
   };
   serverTime: string;
@@ -299,8 +296,6 @@ export default function FixturesClient({
             const homeFlag = getTeamFlagUrl(match.homeTeam);
             const awayFlag = getTeamFlagUrl(match.awayTeam);
 
-            const isMatchAnonymous = settings.anonymousMode || match.isAnonymous;
-
             return (
               <div
                 key={match.id}
@@ -310,11 +305,6 @@ export default function FixturesClient({
                 <div className="flex items-center justify-between text-[10px] text-slate-550 dark:text-slate-500 border-b border-slate-300 dark:border-slate-800/40 pb-1.5">
                   <span className="font-bold text-emerald-600 dark:text-emerald-500 tracking-wider uppercase flex items-center gap-1">
                     Match {match.id} • {isMatchKnockout ? getStageLabel(match.stage) : `Group ${match.group}`}
-                    {isMatchAnonymous && (
-                      <span className="text-[8px] bg-indigo-500/10 text-indigo-500 px-1 py-0.25 rounded border border-indigo-500/20 font-bold uppercase shrink-0">
-                        Anon
-                      </span>
-                    )}
                   </span>
                   <span>
                     {kickoffTime.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} @{' '}

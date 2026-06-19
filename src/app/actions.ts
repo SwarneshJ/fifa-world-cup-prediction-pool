@@ -13,8 +13,6 @@ import {
   updateMatchResult,
   updateMatchTeams,
   updateMatchLock,
-  requestMatchAnonymity,
-  approveMatchAnonymity,
   useSpecialPrivilege,
 } from '@/lib/dbQueries';
 import * as bcrypt from 'bcryptjs';
@@ -117,30 +115,6 @@ export async function submitPrediction(
   // Save prediction
   await savePrediction(userId, matchId, pick, scoreHome, scoreAway);
 
-  revalidatePath('/today');
-  revalidatePath('/fixtures');
-  revalidatePath('/standings');
-  return { success: true };
-}
-
-// Non-admin requests anonymity for a match
-export async function requestAnonymityForMatch(matchId: number) {
-  await requireUser();
-  await requestMatchAnonymity(matchId);
-  revalidatePath('/today');
-  revalidatePath('/fixtures');
-  revalidatePath('/admin');
-  return { success: true };
-}
-
-// Admin approves/rejects anonymity for a match
-export async function adminApproveAnonymity(matchId: number, isAnonymous: boolean) {
-  await requireAdmin();
-  await approveMatchAnonymity(matchId, isAnonymous);
-  revalidatePath('/today');
-  revalidatePath('/fixtures');
-  revalidatePath('/standings');
-  revalidatePath('/admin');
   return { success: true };
 }
 

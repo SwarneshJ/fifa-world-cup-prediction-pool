@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { submitPrediction, requestAnonymityForMatch, adminApproveAnonymity } from '@/app/actions';
+import { submitPrediction } from '@/app/actions';
 import { getTeamFlagUrl } from '@/lib/flags';
-import { Check, Clock, ShieldAlert, Trophy, ChevronLeft, ChevronRight, EyeOff, ShieldCheck, HelpCircle, Star } from 'lucide-react';
+import { Check, Clock, ShieldAlert, Trophy, ChevronLeft, ChevronRight, ShieldCheck, HelpCircle, Star } from 'lucide-react';
 
 interface Match {
   id: number;
@@ -18,8 +18,6 @@ interface Match {
   winner: string | null;
   finished: boolean;
   isLockedManually: boolean;
-  isAnonymous: boolean;
-  anonymityRequested: boolean;
 }
 
 interface Prediction {
@@ -212,28 +210,6 @@ export default function TodayClient({
     }
   };
 
-
-
-  const handleRequestAnonymity = async (matchId: number) => {
-    try {
-      await requestAnonymityForMatch(matchId);
-      alert('Anonymity request sent to Swaggy (Admin).');
-      window.location.reload();
-    } catch (err: any) {
-      alert(err.message || 'Failed to request anonymity');
-    }
-  };
-
-  const handleApproveAnonymity = async (matchId: number, approve: boolean) => {
-    try {
-      await adminApproveAnonymity(matchId, approve);
-      alert(approve ? 'Match set to Anonymous.' : 'Anonymity request rejected.');
-      window.location.reload();
-    } catch (err: any) {
-      alert(err.message || 'Failed to moderate anonymity request');
-    }
-  };
-
   const handleDateChange = (direction: 'prev' | 'next') => {
     const idx = dates.indexOf(selectedDate);
     if (direction === 'prev' && idx > 0) {
@@ -319,7 +295,6 @@ export default function TodayClient({
             const votedUsers = users.filter((u) => votedUserIds.includes(u.id));
             const pendingUsers = users.filter((u) => !votedUserIds.includes(u.id));
 
-            const isMatchAnonymous = settings.anonymousMode || match.isAnonymous;
 
             const homeFlag = getTeamFlagUrl(match.homeTeam);
             const awayFlag = getTeamFlagUrl(match.awayTeam);
@@ -335,11 +310,6 @@ export default function TodayClient({
                     Match {match.id} • {isKnockout ? match.stage.toUpperCase() : `Group ${match.group}`}
                   </span>
                   <div className="flex items-center gap-1.5">
-                    {isMatchAnonymous && (
-                      <span className="flex items-center gap-0.5 text-[9px] bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 px-1.5 py-0.5 rounded border border-indigo-500/20 font-extrabold uppercase">
-                        <EyeOff className="w-2.5 h-2.5" /> Anon
-                      </span>
-                    )}
 
                     {isNotOpenYet ? (
                       <span className="text-[9px] bg-slate-100 text-slate-500 font-extrabold uppercase tracking-widest px-2 py-0.5 rounded border border-slate-250 shadow-sm">
@@ -496,62 +466,6 @@ export default function TodayClient({
                       </div>
                     )}
 
-                    {/* Anonymity request logic for non-admins */}
-                    {!isAdmin && !isMatchAnonymous && (
-                      <div className="pt-2 border-t border-slate-250 dark:border-slate-900/60 flex justify-center">
-                        {match.anonymityRequested ? (
-                          <span className="text-[9px] text-indigo-500 bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1 rounded-lg font-extrabold uppercase tracking-wider cursor-not-allowed">
-                            Anonymity Requested (Pending Approval)
-                          </span>
-                        ) : (
-                          <button
-                            type="button"
-                            onClick={() => handleRequestAnonymity(match.id)}
-                            className="flex items-center gap-1 py-1 px-3 border border-slate-300 dark:border-slate-800 hover:border-indigo-500 text-[9px] font-extrabold rounded-lg text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all cursor-pointer uppercase tracking-wider bg-white dark:bg-slate-900 shadow-sm"
-                          >
-                            <EyeOff className="w-3 h-3" /> Request Anonymity
-                          </button>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Anonymity request logic for admins */}
-                    {isAdmin && !isMatchAnonymous && (
-                      <div className="pt-2 border-t border-slate-250 dark:border-slate-900/60 flex flex-col items-center gap-1.5">
-                        {match.anonymityRequested && (
-                          <div className="flex flex-col items-center gap-1.5">
-                            <span className="text-[9px] text-indigo-500 font-extrabold uppercase tracking-wider">
-                              Anonymity requested by player!
-                            </span>
-                            <div className="flex gap-2">
-                              <button
-                                type="button"
-                                onClick={() => handleApproveAnonymity(match.id, true)}
-                                className="py-1 px-3 bg-emerald-500 text-slate-950 rounded-lg text-[9px] font-black cursor-pointer shadow-sm"
-                              >
-                                Approve
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => handleApproveAnonymity(match.id, false)}
-                                className="py-1 px-3 bg-white dark:bg-slate-900 text-rose-655 dark:text-rose-400 border border-slate-300 dark:border-slate-800 rounded-lg text-[9px] font-black cursor-pointer shadow-sm hover:bg-rose-500/10"
-                              >
-                                Reject
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                        {!match.anonymityRequested && (
-                          <button
-                            type="button"
-                            onClick={() => handleApproveAnonymity(match.id, true)}
-                            className="flex items-center gap-1 py-1 px-3 border border-slate-300 dark:border-slate-800 text-[9px] font-extrabold rounded-lg text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer uppercase tracking-wider bg-white dark:bg-slate-900 shadow-sm"
-                          >
-                            <EyeOff className="w-3 h-3" /> Make Anonymous
-                          </button>
-                        )}
-                      </div>
-                    )}
                   </div>
                 ) : (
                   /* Locked picks breakdown with nicknames */
@@ -560,51 +474,7 @@ export default function TodayClient({
                       Picks Breakdown
                     </div>
 
-                    {isMatchAnonymous ? (
-                      <div className="text-xs text-slate-600 dark:text-slate-300 space-y-1 text-center font-bold">
-                        <p className="text-[9px] text-indigo-500 uppercase font-black tracking-wider mb-1">
-                          🔒 Match Anonymity is Active
-                        </p>
-                        {isKnockout ? (
-                          <div className="flex justify-around bg-slate-200/50 dark:bg-slate-950/60 p-2 rounded-lg border border-slate-250 dark:border-slate-900">
-                            <div>
-                              {match.homeTeam}:{' '}
-                              <span className="text-emerald-600 dark:text-emerald-400 font-black">
-                                {matchPredictions.filter((p) => p.pick === 'home_advance').length}
-                              </span>
-                            </div>
-                            <div>
-                              {match.awayTeam}:{' '}
-                              <span className="text-emerald-600 dark:text-emerald-400 font-black">
-                                {matchPredictions.filter((p) => p.pick === 'away_advance').length}
-                              </span>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="flex justify-around bg-slate-200/50 dark:bg-slate-950/60 p-2 rounded-lg border border-slate-250 dark:border-slate-900">
-                            <div>
-                              {match.homeTeam}:{' '}
-                              <span className="text-emerald-600 dark:text-emerald-400 font-black">
-                                {matchPredictions.filter((p) => p.pick === 'home').length}
-                              </span>
-                            </div>
-                            <div>
-                              Draw:{' '}
-                              <span className="text-emerald-600 dark:text-emerald-400 font-black">
-                                {matchPredictions.filter((p) => p.pick === 'draw').length}
-                              </span>
-                            </div>
-                            <div>
-                              {match.awayTeam}:{' '}
-                              <span className="text-emerald-600 dark:text-emerald-400 font-black">
-                                {matchPredictions.filter((p) => p.pick === 'away').length}
-                              </span>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <div className="space-y-1">
+                    <div className="space-y-1">
                         {matchPredictions.length === 0 ? (
                           <div className="text-[11px] text-slate-500 text-center italic">No one voted on this match</div>
                         ) : (
@@ -655,7 +525,6 @@ export default function TodayClient({
                           </div>
                         )}
                       </div>
-                    )}
                   </div>
                 )}
 

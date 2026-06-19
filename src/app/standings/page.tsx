@@ -2,9 +2,19 @@ import React from 'react';
 import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { getStandings } from '@/app/actions';
-import { Trophy, CheckCircle2, XCircle, Award } from 'lucide-react';
+import { Trophy, Award } from 'lucide-react';
 
 export const revalidate = 0; // Live leaderboard calculation
+
+// Rank title config: label + pill styling
+const RANK_TITLES = [
+  { label: 'Sigma',   style: 'bg-amber-500/15 text-amber-600 border-amber-500/30' },
+  { label: 'Expert',  style: 'bg-sky-500/15 text-sky-600 border-sky-500/30' },
+  { label: 'Amateur', style: 'bg-emerald-500/15 text-emerald-600 border-emerald-500/30' },
+  { label: 'Noobdya', style: 'bg-rose-500/15 text-rose-500 border-rose-500/30' },
+  { label: 'SC',      style: 'bg-purple-500/15 text-purple-500 border-purple-500/30' },
+  { label: 'ST',      style: 'bg-slate-400/20 text-slate-500 border-slate-400/30' },
+];
 
 export default async function StandingsPage() {
   const session = await auth();
@@ -14,6 +24,22 @@ export default async function StandingsPage() {
 
   const standings = await getStandings();
 
+  // Determine if the top 3 all share the same score (triple-sigma rule)
+  const tripleSigma =
+    standings.length >= 3 &&
+    standings[0].totalPoints === standings[1].totalPoints &&
+    standings[1].totalPoints === standings[2].totalPoints;
+
+  // Map each player to their rank title index
+  function getRankTitleIndex(index: number): number {
+    if (tripleSigma) {
+      if (index <= 2) return 0; // all Sigma
+      if (index === 3) return 3; // Noobdya
+      return index;             // SC (4), ST (5), etc.
+    }
+    return index; // normal: 0=Sigma, 1=Expert, 2=Amateur, 3=Noobdya, 4=SC, 5=ST
+  }
+
   return (
     <div className="flex-1 flex flex-col space-y-4">
       <div className="flex flex-col">
@@ -21,7 +47,7 @@ export default async function StandingsPage() {
           Leaderboard
         </h1>
         <p className="text-xs text-slate-600">
-          Standings & rankings of the private pool
+          Standings &amp; rankings of the private pool
         </p>
       </div>
 
@@ -42,6 +68,9 @@ export default async function StandingsPage() {
           } else if (rank === 3) {
             rankBadgeBg = 'bg-amber-700 text-white border-amber-600 font-extrabold';
           }
+
+          const titleIdx = getRankTitleIndex(index);
+          const rankTitle = RANK_TITLES[titleIdx] ?? null;
 
           return (
             <div
@@ -70,9 +99,18 @@ export default async function StandingsPage() {
                     </span>
                     {rankIcon}
                   </div>
-                  <span className="text-[10px] text-slate-500 font-medium">
-                    @{user.username} {user.isAdmin && '• Admin'}
-                  </span>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <span className="text-[10px] text-slate-500 font-medium">
+                      @{user.username} {user.isAdmin && '• Admin'}
+                    </span>
+                    {rankTitle && (
+                      <span
+                        className={`text-[9px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded border ${rankTitle.style}`}
+                      >
+                        {rankTitle.label}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
 

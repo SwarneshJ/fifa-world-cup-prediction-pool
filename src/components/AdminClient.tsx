@@ -7,10 +7,9 @@ import {
   adminUpdateKnockoutTeams,
   adminToggleMatchLock,
   adminResetUserPassword,
-  adminApproveAnonymity,
 } from '@/app/actions';
 import { getTeamFlagUrl } from '@/lib/flags';
-import { Settings, Users, Calendar, CheckCircle2, AlertCircle, Edit3, Lock, Unlock, EyeOff, ShieldAlert } from 'lucide-react';
+import { Settings, Users, Calendar, CheckCircle2, AlertCircle, Edit3, Lock, Unlock, ShieldAlert } from 'lucide-react';
 
 interface Match {
   id: number;
@@ -25,8 +24,6 @@ interface Match {
   winner: string | null;
   finished: boolean;
   isLockedManually: boolean;
-  isAnonymous: boolean;
-  anonymityRequested: boolean;
 }
 
 interface User {
@@ -41,7 +38,6 @@ interface AdminClientProps {
   users: User[];
   currentUserId: number;
   settings: {
-    anonymousMode: boolean;
     exactScoreBonus: boolean;
   };
 }
@@ -52,7 +48,6 @@ export default function AdminClient({
   currentUserId,
   settings,
 }: AdminClientProps) {
-  const [anonymousMode, setAnonymousMode] = useState(settings.anonymousMode);
   const [exactScoreBonus, setExactScoreBonus] = useState(settings.exactScoreBonus);
   const [settingsSuccess, setSettingsSuccess] = useState(false);
   const [settingsLoading, setSettingsLoading] = useState(false);
@@ -70,7 +65,6 @@ export default function AdminClient({
   const [matchEditAwayScore, setMatchEditAwayScore] = useState('');
   const [matchEditWinner, setMatchEditWinner] = useState<'home' | 'draw' | 'away'>('draw');
   const [matchEditFinished, setMatchEditFinished] = useState(false);
-  const [matchEditIsAnonymous, setMatchEditIsAnonymous] = useState(false);
   const [matchSuccess, setMatchSuccess] = useState<string | null>(null);
   const [matchError, setMatchError] = useState<string | null>(null);
   const [matchLoading, setMatchLoading] = useState(false);
@@ -81,7 +75,7 @@ export default function AdminClient({
     setSettingsLoading(true);
     setSettingsSuccess(false);
     try {
-      await adminUpdateSettings(anonymousMode, exactScoreBonus);
+      await adminUpdateSettings(false, exactScoreBonus);
       setSettingsSuccess(true);
       setTimeout(() => setSettingsSuccess(false), 3000);
     } catch (err) {
@@ -138,7 +132,6 @@ export default function AdminClient({
       setMatchEditAwayScore(m.awayScore !== null ? String(m.awayScore) : '');
       setMatchEditWinner((m.winner as any) || (m.stage !== 'group' ? 'home' : 'draw'));
       setMatchEditFinished(m.finished);
-      setMatchEditIsAnonymous(m.isAnonymous);
     }
   };
 
@@ -159,10 +152,7 @@ export default function AdminClient({
         await adminUpdateKnockoutTeams(match.id, matchEditHomeTeam, matchEditAwayTeam);
       }
 
-      // 2. Update match anonymity
-      await adminApproveAnonymity(match.id, matchEditIsAnonymous);
-
-      // 3. Save scores / finished / winner
+      // 2. Save scores / finished / winner
       if (matchEditFinished) {
         if (matchEditHomeScore === '' || matchEditAwayScore === '') {
           throw new Error('Please enter home and away scores to mark match as finished.');
@@ -211,16 +201,6 @@ export default function AdminClient({
     }
   };
 
-  const handleApproveAnonymityRequest = async (matchId: number, approve: boolean) => {
-    try {
-      await adminApproveAnonymity(matchId, approve);
-      alert(approve ? 'Match anonymity approved.' : 'Anonymity request rejected.');
-      window.location.reload();
-    } catch (err: any) {
-      alert('Moderation failed.');
-    }
-  };
-
   const filteredMatches = initialMatches.filter((m) => {
     if (matchesFilter === 'unfinished') return !m.finished;
     if (matchesFilter === 'finished') return m.finished;
@@ -229,47 +209,8 @@ export default function AdminClient({
 
   const selectedMatch = initialMatches.find((x) => x.id === selectedMatchId);
 
-  // Find matches that have requested anonymity
-  const anonymityRequests = initialMatches.filter((m) => m.anonymityRequested);
-
   return (
     <div className="space-y-6">
-      {/* 0. Moderation Panel: Anonymity Requests */}
-      {anonymityRequests.length > 0 && (
-        <div className="glass-card rounded-2xl border border-indigo-500/30 p-5 bg-indigo-500/5 shadow-lg">
-          <h2 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-3 flex items-center gap-1.5 border-b border-slate-300 dark:border-slate-800 pb-2 flex-wrap">
-            <EyeOff className="w-4 h-4 text-indigo-500 animate-pulse" /> Pending Anonymity Requests ({anonymityRequests.length})
-          </h2>
-          <div className="space-y-3">
-            {anonymityRequests.map((req) => (
-              <div key={req.id} className="flex justify-between items-center bg-slate-200/50 dark:bg-slate-950 p-2.5 rounded-xl border border-slate-300 dark:border-slate-900">
-                <div className="flex flex-col min-w-0 pr-2">
-                  <span className="text-[11px] font-bold text-slate-800 dark:text-slate-100 uppercase">
-                    Match {req.id} ({req.stage})
-                  </span>
-                  <span className="text-[10px] text-slate-500 truncate mt-0.5">
-                    {req.homeTeam} vs {req.awayTeam}
-                  </span>
-                </div>
-                <div className="flex gap-2 shrink-0">
-                  <button
-                    onClick={() => handleApproveAnonymityRequest(req.id, true)}
-                    className="py-1 px-2.5 bg-emerald-500 text-slate-950 text-[10px] font-extrabold rounded-lg hover:bg-emerald-400 cursor-pointer"
-                  >
-                    Approve
-                  </button>
-                  <button
-                    onClick={() => handleApproveAnonymityRequest(req.id, false)}
-                    className="py-1 px-2.5 bg-slate-300 dark:bg-slate-900 text-slate-700 dark:text-slate-400 hover:bg-slate-400 dark:hover:bg-slate-800 text-[10px] font-extrabold rounded-lg cursor-pointer border border-slate-400 dark:border-slate-800"
-                  >
-                    Reject
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* 1. Global Settings */}
       <div className="glass-card rounded-2xl border p-5 shadow-xl">
@@ -277,22 +218,6 @@ export default function AdminClient({
           <Settings className="w-4 h-4 text-emerald-500" /> Global Pool Settings
         </h2>
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col pr-4">
-              <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
-                Anonymous Mode (Global)
-              </span>
-              <span className="text-[10px] text-slate-500 leading-normal mt-0.5">
-                Hide individual predictions for *all* matches post-kickoff.
-              </span>
-            </div>
-            <input
-              type="checkbox"
-              checked={anonymousMode}
-              onChange={(e) => setAnonymousMode(e.target.checked)}
-              className="w-10 h-6 shrink-0 accent-emerald-500 cursor-pointer bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded"
-            />
-          </div>
 
 
 
@@ -457,24 +382,6 @@ export default function AdminClient({
                   </div>
                 </div>
               )}
-
-              {/* Match-level Anonymity Toggle */}
-              <div className="flex items-center justify-between bg-slate-200/50 dark:bg-slate-950 p-2.5 rounded-xl border border-slate-300 dark:border-slate-900">
-                <div className="flex flex-col pr-4">
-                  <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 uppercase tracking-wider flex items-center gap-1">
-                    Match Anonymity
-                  </span>
-                  <span className="text-[9px] text-slate-550 dark:text-slate-500 leading-none mt-1">
-                    If checked, individual picks remain hidden after kickoff.
-                  </span>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={matchEditIsAnonymous}
-                  onChange={(e) => setMatchEditIsAnonymous(e.target.checked)}
-                  className="w-10 h-6 shrink-0 accent-emerald-500 cursor-pointer bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded"
-                />
-              </div>
 
               {/* Enter Score and Winner */}
               <div className="space-y-3">
