@@ -6,7 +6,8 @@ import { eq, and, asc } from 'drizzle-orm';
 import { FIXTURES } from './fixtures';
 import * as bcrypt from 'bcryptjs';
 
-const isMockMode = !process.env.DATABASE_URL || process.env.DATABASE_URL.includes('placeholder-url') || process.env.DATABASE_URL.includes('localhost');
+const dbUrl = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+const isMockMode = !dbUrl || dbUrl.includes('placeholder-url') || dbUrl.includes('localhost');
 const localDbPath = path.join(process.cwd(), 'local_db.json');
 
 // Interface definitions

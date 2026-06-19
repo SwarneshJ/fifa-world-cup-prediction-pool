@@ -3,6 +3,10 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { getUserByUsername } from './dbQueries';
 import * as bcrypt from 'bcryptjs';
 
+if (!process.env.AUTH_SECRET && !process.env.NEXTAUTH_SECRET) {
+  process.env.AUTH_SECRET = '9a4b2c8e1f03d5a7c2b9f8e7d6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7';
+}
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     CredentialsProvider({
@@ -62,5 +66,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: 'jwt',
   },
-  secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET || '9a4b2c8e1f03d5a7c2b9f8e7d6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7',
 });

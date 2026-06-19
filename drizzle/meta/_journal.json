@@ -8,6 +8,13 @@
       "when": 1781838247094,
       "tag": "0000_exotic_queen_noir",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1781842529572,
+      "tag": "0001_jittery_pride",
+      "breakpoints": true
     }
   ]
 }
