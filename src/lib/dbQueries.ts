@@ -319,6 +319,56 @@ export async function getAllMatches(): Promise<DBMatch[]> {
     return data.matches;
   } else {
     const dbMatches = await db.select().from(matches);
+    let hasUpdates = false;
+    const now = new Date();
+
+    try {
+      const gamesFilePath = path.join(process.cwd(), 'src', 'lib', 'games.json');
+      if (fs.existsSync(gamesFilePath)) {
+        const gamesData = JSON.parse(fs.readFileSync(gamesFilePath, 'utf8'));
+        const gamesList = gamesData.games || [];
+
+        for (const match of dbMatches) {
+          if (!match.finished) {
+            const kickoff = new Date(match.kickoffAt);
+            // Consider the match finished 2 hours after kickoff
+            const endsAt = new Date(kickoff.getTime() + 2 * 60 * 60 * 1000);
+            if (now >= endsAt) {
+              const matchedGame = gamesList.find((g: any) => String(g.id) === String(match.id));
+              if (matchedGame) {
+                const hs = parseInt(matchedGame.home_score, 10);
+                const as = parseInt(matchedGame.away_score, 10);
+                if (!isNaN(hs) && !isNaN(as)) {
+                  const winner = hs > as ? 'home' : as > hs ? 'away' : 'draw';
+                  
+                  // Update match in PostgreSQL database
+                  await db
+                    .update(matches)
+                    .set({
+                      finished: true,
+                      homeScore: hs,
+                      awayScore: as,
+                      winner,
+                    })
+                    .where(eq(matches.id, match.id));
+
+                  // Update current array item
+                  match.finished = true;
+                  match.homeScore = hs;
+                  match.awayScore = as;
+                  match.winner = winner;
+
+                  hasUpdates = true;
+                }
+              }
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Error auto-updating DB matches from games.json:', err);
+    }
+
     return dbMatches.map((m) => ({
       ...m,
       kickoffAt: m.kickoffAt.toISOString(),
