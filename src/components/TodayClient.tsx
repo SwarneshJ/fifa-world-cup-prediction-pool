@@ -221,6 +221,64 @@ export default function TodayClient({
 
   const userMap = new Map(users.map((u) => [u.id, u.name]));
 
+  // Calculate cumulative scores so far
+  const getCumulativeScores = () => {
+    const players = users.filter((u) => !u.isAdmin);
+    const scores = players.map((u) => {
+      const userPreds = predictions.filter((p) => p.userId === u.id);
+      let totalPoints = 0;
+      let correctCount = 0;
+      let missedCount = 0;
+
+      initialMatches.forEach((match) => {
+        if (!match.finished) return;
+
+        const pred = userPreds.find((p) => p.matchId === match.id);
+        if (!pred) {
+          totalPoints -= 1;
+          missedCount++;
+          return;
+        }
+
+        const isKnockout = match.stage !== 'group';
+        let outcomeCorrect = false;
+
+        if (isKnockout) {
+          const predictedWinner = pred.pick === 'home_advance' ? 'home' : 'away';
+          if (predictedWinner === match.winner) {
+            outcomeCorrect = true;
+          }
+        } else {
+          if (pred.pick === match.winner) {
+            outcomeCorrect = true;
+          }
+        }
+
+        if (outcomeCorrect) {
+          totalPoints += 1;
+          correctCount++;
+        }
+      });
+
+      return {
+        id: u.id,
+        name: u.name,
+        username: u.username,
+        totalPoints,
+        correctCount,
+        missedCount,
+      };
+    });
+
+    // Sort by points descending, then by name ascending
+    return scores.sort((a, b) => {
+      if (b.totalPoints !== a.totalPoints) {
+        return b.totalPoints - a.totalPoints;
+      }
+      return a.name.localeCompare(b.name);
+    });
+  };
+
   return (
     <div className="flex-1 flex flex-col space-y-5">
       {/* ⚽ World Cup Hero Greeting Header Banner */}
@@ -597,6 +655,62 @@ export default function TodayClient({
             );
           })
         )}
+      </div>
+
+      {/* 🏆 Cumulative Standings Card */}
+      <div className="glass-card rounded-2xl border border-slate-200 dark:border-slate-800 p-4.5 shadow-lg space-y-3.5">
+        <div className="flex items-center justify-between border-b border-slate-250 dark:border-slate-800 pb-2.5">
+          <h3 className="text-xs font-black text-slate-850 dark:text-emerald-300 uppercase tracking-widest flex items-center gap-1.5">
+            <Trophy className="w-4 h-4 text-amber-500 animate-pulse" /> Cumulative Standings So Far
+          </h3>
+          <span className="text-[10px] text-slate-550 dark:text-slate-500 font-extrabold uppercase tracking-wider">
+            as of {selectedDate}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 gap-2.5">
+          {getCumulativeScores().map((player, idx) => {
+            const rank = idx + 1;
+            const isSelf = player.id === currentUserId;
+            
+            let rankBadge = 'bg-slate-100 dark:bg-slate-950 border-slate-200 dark:border-slate-850 text-slate-650 dark:text-slate-450';
+            if (rank === 1) rankBadge = 'bg-amber-500 text-slate-950 border-amber-400 font-extrabold';
+            else if (rank === 2) rankBadge = 'bg-slate-300 text-slate-950 border-slate-200 font-extrabold';
+            else if (rank === 3) rankBadge = 'bg-amber-700 text-white border-amber-600 font-extrabold';
+
+            return (
+              <div
+                key={player.id}
+                className={`flex items-center justify-between p-2.5 rounded-xl border text-xs transition-all ${
+                  isSelf
+                    ? 'border-emerald-500/40 bg-emerald-500/5 shadow-inner animate-pulse-subtle'
+                    : 'border-slate-205 dark:border-slate-900 bg-white/20 dark:bg-slate-950/20'
+                }`}
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className={`w-5.5 h-5.5 flex items-center justify-center rounded-lg border text-[10px] font-bold shrink-0 ${rankBadge}`}>
+                    {rank}
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className={`font-bold leading-tight truncate ${isSelf ? 'text-emerald-700 dark:text-emerald-400 font-extrabold' : 'text-slate-805 dark:text-slate-200'}`}>
+                      {player.name}
+                    </span>
+                    <span className="text-[9px] text-slate-550 dark:text-slate-500 truncate leading-none mt-0.5">
+                      {player.correctCount} correct • {player.missedCount} missed
+                    </span>
+                  </div>
+                </div>
+
+                <div className="text-right shrink-0 flex items-center gap-1">
+                  <span className="text-[10px] text-slate-550 dark:text-slate-500 font-bold uppercase mr-1">Points:</span>
+                  <span className="text-sm font-black text-amber-500 dark:text-amber-400">
+                    {player.totalPoints}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
