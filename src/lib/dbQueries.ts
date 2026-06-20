@@ -286,6 +286,43 @@ export async function getAllUsers(): Promise<DBUser[]> {
   }
 }
 
+async function getLastSyncTime(): Promise<number> {
+  if (isMockMode) {
+    const data = readLocalDb();
+    if (!data.settings) data.settings = {};
+    return parseInt(data.settings.last_sync_time || '0', 10);
+  } else {
+    try {
+      const [row] = await db.select().from(settings).where(eq(settings.key, 'last_sync_time')).limit(1);
+      return row ? parseInt(row.value, 10) : 0;
+    } catch {
+      return 0;
+    }
+  }
+}
+
+async function setLastSyncTime(timeMs: number): Promise<void> {
+  const valStr = String(timeMs);
+  if (isMockMode) {
+    const data = readLocalDb();
+    if (!data.settings) data.settings = {};
+    data.settings.last_sync_time = valStr;
+    writeLocalDb(data);
+  } else {
+    try {
+      await db
+        .insert(settings)
+        .values({ key: 'last_sync_time', value: valStr })
+        .onConflictDoUpdate({
+          target: settings.key,
+          set: { value: valStr },
+        });
+    } catch (err) {
+      console.error('Error saving last_sync_time:', err);
+    }
+  }
+}
+
 export async function getAllMatches(): Promise<DBMatch[]> {
   const isMock = isMockMode;
   let matchesList: DBMatch[] = [];
@@ -330,86 +367,96 @@ export async function getAllMatches(): Promise<DBMatch[]> {
     };
   }
 
-  // Fetch latest live match results from the internet
-  let gamesList: any[] = [];
-  let isLiveAPI = false;
-  try {
-    const res = await fetch('https://worldcup26.ir/get/games', {
-      next: { revalidate: 60 } // Cache API response for 60 seconds
-    });
-    if (res.ok) {
-      const apiData = await res.json();
-      gamesList = apiData.games || [];
-      isLiveAPI = true;
-    }
-  } catch (err) {
-    console.error('Error fetching live scores from worldcup26.ir:', err);
-  }
+  // Throttle live API syncing to once every 3 minutes
+  const now = new Date();
+  const lastSync = await getLastSyncTime();
+  const cacheDuration = 3 * 60 * 1000; // 3 minutes
+  const shouldSync = (now.getTime() - lastSync) >= cacheDuration;
 
-  // Fallback to local games.json if API fetch failed
-  if (gamesList.length === 0) {
+  if (shouldSync) {
+    // Lock the sync immediately to prevent concurrent requests from launching slow fetches
+    await setLastSyncTime(now.getTime());
+
+    // Fetch latest live match results from the internet
+    let gamesList: any[] = [];
+    let isLiveAPI = false;
     try {
-      const gamesFilePath = path.join(process.cwd(), 'src', 'lib', 'games.json');
-      if (fs.existsSync(gamesFilePath)) {
-        const gamesData = JSON.parse(fs.readFileSync(gamesFilePath, 'utf8'));
-        gamesList = gamesData.games || [];
+      const res = await fetch('https://worldcup26.ir/get/games', {
+        next: { revalidate: 60 } // Cache API response for 60 seconds
+      });
+      if (res.ok) {
+        const apiData = await res.json();
+        gamesList = apiData.games || [];
+        isLiveAPI = true;
       }
     } catch (err) {
-      console.error('Error reading games.json fallback:', err);
+      console.error('Error fetching live scores from worldcup26.ir:', err);
     }
-  }
 
-  // Process auto-updates & self-healing
-  let hasUpdates = false;
-  const now = new Date();
-
-  matchesList.forEach((match: any) => {
-    const matchedGame = gamesList.find((g: any) => String(g.id) === String(match.id));
-    if (matchedGame) {
-      const isApiFinished = matchedGame.finished === 'TRUE' || matchedGame.finished === true;
-      if (isApiFinished) {
-        const kickoff = new Date(match.kickoffAt);
-        const endsAt = new Date(kickoff.getTime() + 2 * 60 * 60 * 1000);
-        // Only mark finished if current time is past kickoff/expected end
-        // (to prevent any API anomalies from finishing future games)
-        if (now >= endsAt) {
-          const hs = parseInt(matchedGame.home_score, 10);
-          const as = parseInt(matchedGame.away_score, 10);
-          if (!isNaN(hs) && !isNaN(as)) {
-            const apiWinner = hs > as ? 'home' : as > hs ? 'away' : 'draw';
-            
-            // Self-heal: update if database has wrong scores or is unfinished
-            const needsUpdate = !match.finished || 
-                                match.homeScore !== hs || 
-                                match.awayScore !== as || 
-                                match.winner !== apiWinner;
-
-            if (needsUpdate) {
-              match.finished = true;
-              match.homeScore = hs;
-              match.awayScore = as;
-              match.winner = apiWinner;
-              hasUpdates = true;
-            }
-          }
+    // Fallback to local games.json if API fetch failed
+    if (gamesList.length === 0) {
+      try {
+        const gamesFilePath = path.join(process.cwd(), 'src', 'lib', 'games.json');
+        if (fs.existsSync(gamesFilePath)) {
+          const gamesData = JSON.parse(fs.readFileSync(gamesFilePath, 'utf8'));
+          gamesList = gamesData.games || [];
         }
-      } else {
-        // Self-heal: if the database has it finished but API says it's not finished,
-        // reset it back to unfinished. ONLY do this if we successfully fetched the live API,
-        // since the local games.json fallback is static and outdated.
-        if (isLiveAPI && match.finished) {
-          match.finished = false;
-          match.homeScore = null;
-          match.awayScore = null;
-          match.winner = null;
-          hasUpdates = true;
-        }
+      } catch (err) {
+        console.error('Error reading games.json fallback:', err);
       }
     }
-  });
 
-  if (hasUpdates) {
-    await updateMatchesCallback(matchesList);
+    // Process auto-updates & self-healing
+    let hasUpdates = false;
+
+    matchesList.forEach((match: any) => {
+      const matchedGame = gamesList.find((g: any) => String(g.id) === String(match.id));
+      if (matchedGame) {
+        const isApiFinished = matchedGame.finished === 'TRUE' || matchedGame.finished === true;
+        if (isApiFinished) {
+          const kickoff = new Date(match.kickoffAt);
+          const endsAt = new Date(kickoff.getTime() + 2 * 60 * 60 * 1000);
+          // Only mark finished if current time is past kickoff/expected end
+          // (to prevent any API anomalies from finishing future games)
+          if (now >= endsAt) {
+            const hs = parseInt(matchedGame.home_score, 10);
+            const as = parseInt(matchedGame.away_score, 10);
+            if (!isNaN(hs) && !isNaN(as)) {
+              const apiWinner = hs > as ? 'home' : as > hs ? 'away' : 'draw';
+              
+              // Self-heal: update if database has wrong scores or is unfinished
+              const needsUpdate = !match.finished || 
+                                  match.homeScore !== hs || 
+                                  match.awayScore !== as || 
+                                  match.winner !== apiWinner;
+
+              if (needsUpdate) {
+                match.finished = true;
+                match.homeScore = hs;
+                match.awayScore = as;
+                match.winner = apiWinner;
+                hasUpdates = true;
+              }
+            }
+          }
+        } else {
+          // Self-heal: if the database has it finished but API says it's not finished,
+          // reset it back to unfinished. ONLY do this if we successfully fetched the live API,
+          // since the local games.json fallback is static and outdated.
+          if (isLiveAPI && match.finished) {
+            match.finished = false;
+            match.homeScore = null;
+            match.awayScore = null;
+            match.winner = null;
+            hasUpdates = true;
+          }
+        }
+      }
+    });
+
+    if (hasUpdates) {
+      await updateMatchesCallback(matchesList);
+    }
   }
 
   return matchesList;

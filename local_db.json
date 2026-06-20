@@ -3246,6 +3246,7 @@
   ],
   "settings": {
     "anonymous_mode": "false",
-    "exact_score_bonus": "false"
+    "exact_score_bonus": "false",
+    "last_sync_time": "1781982870680"
   }
 }
