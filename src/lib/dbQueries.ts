@@ -177,7 +177,7 @@ function getInitialMockState() {
       match.awayScore = resultInfo.awayScore;
     }
 
-    const picks = userPicks[dbId - 1];
+    const picks = userPicks[index];
     for (const [userIdStr, pick] of Object.entries(picks)) {
       const userId = parseInt(userIdStr, 10);
       initialPredictions.push({

@@ -159,7 +159,7 @@ async function main() {
   console.log('Seeding predictions...');
   for (let index = 0; index < chronoIds.length; index++) {
     const dbId = chronoIds[index];
-    const picks = userPicks[dbId - 1];
+    const picks = userPicks[index];
     for (const [mockIdStr, pick] of Object.entries(picks)) {
       const mockId = parseInt(mockIdStr, 10);
       const username = mockIdToUsername[mockId];

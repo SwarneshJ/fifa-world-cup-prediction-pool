@@ -4,7 +4,7 @@
       "id": 1,
       "username": "swarnesh_admin",
       "name": "Swaggy",
-      "password": "$2b$10$llbqL/8AgC6KU/dYcp.dd.xZa7lKjMfYdcA8qt7SpAIy79oTdFsUi",
+      "password": "$2b$10$sSxvHWJmptQypQTZ/zUJCuQJyup.93ef5HySu1pV.xMuudK7u9Fva",
       "isAdmin": true,
       "hasSpecialPrivilege": false,
       "specialPrivilegeUsed": false
@@ -13,7 +13,7 @@
       "id": 2,
       "username": "swarnesh",
       "name": "Swaggy",
-      "password": "$2b$10$llbqL/8AgC6KU/dYcp.dd.DMpJxarCUCSctlDp0Zcr95iQkL43Mze",
+      "password": "$2b$10$sSxvHWJmptQypQTZ/zUJCu0siZHqsc2iJ4NozFjx1BIYpMCn4KLDu",
       "isAdmin": false,
       "hasSpecialPrivilege": true,
       "specialPrivilegeUsed": false
@@ -22,7 +22,7 @@
       "id": 3,
       "username": "varun",
       "name": "Motesh",
-      "password": "$2b$10$llbqL/8AgC6KU/dYcp.dd.mt0pq8Z6YJZHVYGtx4d7ByXrgqg93rW",
+      "password": "$2b$10$sSxvHWJmptQypQTZ/zUJCugwMlJM0mj9BU1YhIEQ8r97oAP.NiCZ2",
       "isAdmin": false,
       "hasSpecialPrivilege": true,
       "specialPrivilegeUsed": false
@@ -31,7 +31,7 @@
       "id": 4,
       "username": "piyush",
       "name": "PRMJ",
-      "password": "$2b$10$llbqL/8AgC6KU/dYcp.dd.Qfhv37dY0uD19yR/2Fz48N27Wd/JsGu",
+      "password": "$2b$10$sSxvHWJmptQypQTZ/zUJCucTshYQBJGILItQxP1Hw.8bl7No52NS6",
       "isAdmin": false,
       "hasSpecialPrivilege": false,
       "specialPrivilegeUsed": false
@@ -40,7 +40,7 @@
       "id": 5,
       "username": "praveen",
       "name": "Illad",
-      "password": "$2b$10$llbqL/8AgC6KU/dYcp.dd.zs6HuzT9rDNlIzvGNAWQpKhkUTeZcyi",
+      "password": "$2b$10$sSxvHWJmptQypQTZ/zUJCu5qtWiyLIufyCUga5jbC8pi5lo78.eoi",
       "isAdmin": false,
       "hasSpecialPrivilege": true,
       "specialPrivilegeUsed": false
@@ -49,7 +49,7 @@
       "id": 6,
       "username": "shaunak",
       "name": "Bokya",
-      "password": "$2b$10$llbqL/8AgC6KU/dYcp.dd.ucUsaSAlxkC8egSzyHHJXJKAuGqw7Jm",
+      "password": "$2b$10$sSxvHWJmptQypQTZ/zUJCuWF9Ys.GfmQEzTTbINfaQ7/8V0P2/6tq",
       "isAdmin": false,
       "hasSpecialPrivilege": false,
       "specialPrivilegeUsed": false
@@ -58,7 +58,7 @@
       "id": 7,
       "username": "nachiket",
       "name": "Naiket",
-      "password": "$2b$10$llbqL/8AgC6KU/dYcp.dd.G0lqA3hUA9czCiu8jq9VyxpOiGfemG6",
+      "password": "$2b$10$sSxvHWJmptQypQTZ/zUJCuiRL/43ntUymm0gePFWNEO9vXZvttmRi",
       "isAdmin": false,
       "hasSpecialPrivilege": true,
       "specialPrivilegeUsed": false
@@ -1738,7 +1738,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.708Z"
+      "updatedAt": "2026-06-18T20:21:27.519Z"
     },
     {
       "id": 2,
@@ -1747,7 +1747,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 3,
@@ -1756,7 +1756,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 4,
@@ -1765,7 +1765,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 5,
@@ -1774,7 +1774,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 6,
@@ -1783,7 +1783,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 7,
@@ -1792,7 +1792,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 8,
@@ -1801,7 +1801,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 9,
@@ -1810,7 +1810,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 10,
@@ -1819,7 +1819,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 11,
@@ -1828,7 +1828,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 12,
@@ -1837,7 +1837,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 13,
@@ -1846,7 +1846,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 14,
@@ -1855,7 +1855,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 15,
@@ -1864,7 +1864,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 16,
@@ -1873,7 +1873,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 17,
@@ -1882,7 +1882,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 18,
@@ -1891,7 +1891,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 19,
@@ -1900,7 +1900,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 20,
@@ -1909,7 +1909,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 21,
@@ -1918,7 +1918,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 22,
@@ -1927,7 +1927,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 23,
@@ -1936,7 +1936,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 24,
@@ -1945,16 +1945,16 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 25,
       "userId": 2,
       "matchId": 8,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 26,
@@ -1963,16 +1963,16 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 27,
       "userId": 4,
       "matchId": 8,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 28,
@@ -1981,7 +1981,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 29,
@@ -1990,7 +1990,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 30,
@@ -1999,7 +1999,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 31,
@@ -2008,61 +2008,61 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 32,
       "userId": 3,
       "matchId": 7,
-      "pick": "away",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 33,
       "userId": 4,
       "matchId": 7,
-      "pick": "away",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 34,
       "userId": 5,
       "matchId": 7,
-      "pick": "away",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 35,
       "userId": 6,
       "matchId": 7,
-      "pick": "away",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 36,
       "userId": 7,
       "matchId": 7,
-      "pick": "away",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 37,
       "userId": 2,
       "matchId": 5,
-      "pick": "away",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 38,
@@ -2071,7 +2071,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 39,
@@ -2080,7 +2080,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 40,
@@ -2089,7 +2089,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 41,
@@ -2098,7 +2098,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 42,
@@ -2107,7 +2107,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 43,
@@ -2116,16 +2116,16 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 44,
       "userId": 3,
       "matchId": 6,
-      "pick": "draw",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 45,
@@ -2134,43 +2134,43 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 46,
       "userId": 5,
       "matchId": 6,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 47,
       "userId": 6,
       "matchId": 6,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 48,
       "userId": 7,
       "matchId": 6,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 49,
       "userId": 2,
       "matchId": 10,
-      "pick": "draw",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 50,
@@ -2179,7 +2179,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 51,
@@ -2188,16 +2188,16 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 52,
       "userId": 5,
       "matchId": 10,
-      "pick": "draw",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 53,
@@ -2206,124 +2206,124 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 54,
       "userId": 7,
       "matchId": 10,
-      "pick": "away",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 55,
       "userId": 2,
       "matchId": 11,
-      "pick": "away",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 56,
       "userId": 3,
       "matchId": 11,
-      "pick": "draw",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 57,
       "userId": 4,
       "matchId": 11,
-      "pick": "draw",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 58,
       "userId": 5,
       "matchId": 11,
-      "pick": "away",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 59,
       "userId": 6,
       "matchId": 11,
-      "pick": "away",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 60,
       "userId": 7,
       "matchId": 11,
-      "pick": "draw",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 61,
       "userId": 2,
       "matchId": 9,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 62,
       "userId": 3,
       "matchId": 9,
-      "pick": "home",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 63,
       "userId": 4,
       "matchId": 9,
-      "pick": "home",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 64,
       "userId": 5,
       "matchId": 9,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 65,
       "userId": 6,
       "matchId": 9,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 66,
       "userId": 7,
       "matchId": 9,
-      "pick": "home",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 67,
@@ -2332,7 +2332,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 68,
@@ -2341,7 +2341,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 69,
@@ -2350,7 +2350,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 70,
@@ -2359,7 +2359,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 71,
@@ -2368,7 +2368,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 72,
@@ -2377,16 +2377,16 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 73,
       "userId": 2,
       "matchId": 14,
-      "pick": "draw",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 74,
@@ -2395,16 +2395,16 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 75,
       "userId": 4,
       "matchId": 14,
-      "pick": "draw",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 76,
@@ -2413,7 +2413,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 77,
@@ -2422,7 +2422,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 78,
@@ -2431,115 +2431,115 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 79,
       "userId": 2,
       "matchId": 15,
-      "pick": "away",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 80,
       "userId": 3,
       "matchId": 15,
-      "pick": "away",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 81,
       "userId": 4,
       "matchId": 15,
-      "pick": "away",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 82,
       "userId": 5,
       "matchId": 15,
-      "pick": "away",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 83,
       "userId": 6,
       "matchId": 15,
-      "pick": "draw",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 84,
       "userId": 7,
       "matchId": 15,
-      "pick": "away",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 85,
       "userId": 2,
       "matchId": 16,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 86,
       "userId": 3,
       "matchId": 16,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 87,
       "userId": 4,
       "matchId": 16,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 88,
       "userId": 5,
       "matchId": 16,
-      "pick": "home",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 89,
       "userId": 6,
       "matchId": 16,
-      "pick": "home",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 90,
       "userId": 7,
       "matchId": 16,
-      "pick": "draw",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 91,
@@ -2548,7 +2548,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 92,
@@ -2557,7 +2557,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 93,
@@ -2566,7 +2566,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 94,
@@ -2575,7 +2575,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 95,
@@ -2584,16 +2584,16 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 96,
       "userId": 7,
       "matchId": 13,
-      "pick": "home",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 97,
@@ -2602,7 +2602,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 98,
@@ -2611,7 +2611,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 99,
@@ -2620,7 +2620,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 100,
@@ -2629,7 +2629,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 101,
@@ -2638,7 +2638,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 102,
@@ -2647,7 +2647,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 103,
@@ -2656,7 +2656,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 104,
@@ -2665,7 +2665,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 105,
@@ -2674,7 +2674,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 106,
@@ -2683,7 +2683,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 107,
@@ -2692,7 +2692,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 108,
@@ -2701,7 +2701,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 109,
@@ -2710,7 +2710,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 110,
@@ -2719,7 +2719,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 111,
@@ -2728,7 +2728,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 112,
@@ -2737,7 +2737,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 113,
@@ -2746,7 +2746,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 114,
@@ -2755,7 +2755,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 115,
@@ -2764,7 +2764,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 116,
@@ -2773,7 +2773,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 117,
@@ -2782,7 +2782,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 118,
@@ -2791,7 +2791,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 119,
@@ -2800,7 +2800,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 120,
@@ -2809,7 +2809,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 121,
@@ -2818,7 +2818,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 122,
@@ -2827,7 +2827,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 123,
@@ -2836,7 +2836,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 124,
@@ -2845,7 +2845,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 125,
@@ -2854,7 +2854,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 126,
@@ -2863,7 +2863,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 127,
@@ -2872,7 +2872,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 128,
@@ -2881,7 +2881,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 129,
@@ -2890,7 +2890,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 130,
@@ -2899,7 +2899,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 131,
@@ -2908,7 +2908,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 132,
@@ -2917,115 +2917,115 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 133,
       "userId": 2,
       "matchId": 24,
-      "pick": "away",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 134,
       "userId": 3,
       "matchId": 24,
-      "pick": "away",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 135,
       "userId": 4,
       "matchId": 24,
-      "pick": "away",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 136,
       "userId": 5,
       "matchId": 24,
-      "pick": "away",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 137,
       "userId": 6,
       "matchId": 24,
-      "pick": "away",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 138,
       "userId": 7,
       "matchId": 24,
-      "pick": "away",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 139,
       "userId": 2,
       "matchId": 23,
-      "pick": "draw",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 140,
       "userId": 3,
       "matchId": 23,
-      "pick": "draw",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 141,
       "userId": 4,
       "matchId": 23,
-      "pick": "draw",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 142,
       "userId": 5,
       "matchId": 23,
-      "pick": "draw",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 143,
       "userId": 6,
       "matchId": 23,
-      "pick": "draw",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 144,
       "userId": 7,
       "matchId": 23,
-      "pick": "draw",
+      "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 145,
@@ -3034,16 +3034,16 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 146,
       "userId": 3,
       "matchId": 28,
-      "pick": "draw",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 147,
@@ -3052,34 +3052,34 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 148,
       "userId": 5,
       "matchId": 28,
-      "pick": "draw",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 149,
       "userId": 6,
       "matchId": 28,
-      "pick": "draw",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 150,
       "userId": 7,
       "matchId": 28,
-      "pick": "draw",
+      "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 151,
@@ -3088,7 +3088,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 152,
@@ -3097,7 +3097,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 153,
@@ -3106,7 +3106,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 154,
@@ -3115,7 +3115,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 155,
@@ -3124,7 +3124,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 156,
@@ -3133,7 +3133,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 157,
@@ -3142,7 +3142,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 158,
@@ -3151,7 +3151,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 159,
@@ -3160,7 +3160,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 160,
@@ -3169,7 +3169,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 161,
@@ -3178,7 +3178,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 162,
@@ -3187,7 +3187,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 163,
@@ -3196,16 +3196,16 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 164,
       "userId": 3,
       "matchId": 25,
-      "pick": "home",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 165,
@@ -3214,34 +3214,34 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 166,
       "userId": 5,
       "matchId": 25,
-      "pick": "home",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 167,
       "userId": 6,
       "matchId": 25,
-      "pick": "home",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 168,
       "userId": 7,
       "matchId": 25,
-      "pick": "home",
+      "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 169,
@@ -3250,7 +3250,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 170,
@@ -3259,7 +3259,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 171,
@@ -3268,7 +3268,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 172,
@@ -3277,7 +3277,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 173,
@@ -3286,7 +3286,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 174,
@@ -3295,7 +3295,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 175,
@@ -3304,7 +3304,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 176,
@@ -3313,7 +3313,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 177,
@@ -3322,7 +3322,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 178,
@@ -3331,7 +3331,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 179,
@@ -3340,7 +3340,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 180,
@@ -3349,7 +3349,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 181,
@@ -3358,7 +3358,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 182,
@@ -3367,7 +3367,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 183,
@@ -3376,7 +3376,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 184,
@@ -3385,7 +3385,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 185,
@@ -3394,7 +3394,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 186,
@@ -3403,7 +3403,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 187,
@@ -3412,7 +3412,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.520Z"
     },
     {
       "id": 188,
@@ -3421,7 +3421,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 189,
@@ -3430,7 +3430,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 190,
@@ -3439,7 +3439,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 191,
@@ -3448,7 +3448,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 192,
@@ -3457,7 +3457,7 @@
       "pick": "draw",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 193,
@@ -3466,7 +3466,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 194,
@@ -3475,7 +3475,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 195,
@@ -3484,7 +3484,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 196,
@@ -3493,7 +3493,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 197,
@@ -3502,7 +3502,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 198,
@@ -3511,7 +3511,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 199,
@@ -3520,7 +3520,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 200,
@@ -3529,7 +3529,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 201,
@@ -3538,7 +3538,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 202,
@@ -3547,7 +3547,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 203,
@@ -3556,7 +3556,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 204,
@@ -3565,7 +3565,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 205,
@@ -3574,7 +3574,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 206,
@@ -3583,7 +3583,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 207,
@@ -3592,7 +3592,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 208,
@@ -3601,7 +3601,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 209,
@@ -3610,7 +3610,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 210,
@@ -3619,7 +3619,7 @@
       "pick": "home",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 211,
@@ -3628,7 +3628,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 212,
@@ -3637,7 +3637,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 213,
@@ -3646,7 +3646,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 214,
@@ -3655,7 +3655,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 215,
@@ -3664,7 +3664,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     },
     {
       "id": 216,
@@ -3673,7 +3673,7 @@
       "pick": "away",
       "predictedHomeScore": null,
       "predictedAwayScore": null,
-      "updatedAt": "2026-06-18T20:18:24.710Z"
+      "updatedAt": "2026-06-18T20:21:27.521Z"
     }
   ],
   "settings": {
