@@ -70,8 +70,20 @@ export default function TodayClient({
 
   const getNow = () => new Date(Date.now() + timeOffset);
 
-  const getLocalDateString = (isoStr: string) => {
-    return new Date(isoStr).toLocaleDateString(undefined, {
+  const getLocalDateKey = (isoStr: string) => {
+    // Format as YYYY-MM-DD in the local timezone
+    const d = new Date(isoStr);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const getLocalDateDisplay = (dateKey: string) => {
+    if (!dateKey) return '';
+    const [year, month, day] = dateKey.split('-');
+    const d = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
+    return d.toLocaleDateString(undefined, {
       month: 'short',
       day: 'numeric',
       year: 'numeric',
@@ -80,19 +92,17 @@ export default function TodayClient({
 
   const matchesByDate: Record<string, Match[]> = {};
   initialMatches.forEach((m) => {
-    const dStr = getLocalDateString(m.kickoffAt);
+    const dStr = getLocalDateKey(m.kickoffAt);
     if (!matchesByDate[dStr]) {
       matchesByDate[dStr] = [];
     }
     matchesByDate[dStr].push(m);
   });
 
-  const dates = Object.keys(matchesByDate).sort(
-    (a, b) => new Date(a).getTime() - new Date(b).getTime()
-  );
+  const dates = Object.keys(matchesByDate).sort();
 
   const getInitialDate = () => {
-    const todayStr = getLocalDateString(getNow().toISOString());
+    const todayStr = getLocalDateKey(getNow().toISOString());
     if (matchesByDate[todayStr]) return todayStr;
 
     const nowMs = getNow().getTime();
@@ -100,7 +110,9 @@ export default function TodayClient({
     let minDiff = Infinity;
 
     dates.forEach((d) => {
-      const diff = Math.abs(new Date(d).getTime() - nowMs);
+      const [year, month, day] = d.split('-');
+      const dTime = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10)).getTime();
+      const diff = Math.abs(dTime - nowMs);
       if (diff < minDiff) {
         minDiff = diff;
         closestDate = d;
@@ -235,7 +247,7 @@ export default function TodayClient({
         if (!match.finished) return;
 
         // Only include matches that occurred on or before the selected date
-        const matchDateStr = getLocalDateString(match.kickoffAt);
+        const matchDateStr = getLocalDateKey(match.kickoffAt);
         const matchDateIdx = dates.indexOf(matchDateStr);
         if (matchDateIdx === -1 || matchDateIdx > selectedIdx) {
           return;
@@ -316,7 +328,7 @@ export default function TodayClient({
           <ChevronLeft className="w-5 h-5" />
         </button>
         <span className="text-sm font-black text-slate-800 dark:text-slate-100 uppercase tracking-widest">
-          {selectedDate}
+          {getLocalDateDisplay(selectedDate)}
         </span>
         <button
           onClick={() => handleDateChange('next')}
@@ -672,7 +684,7 @@ export default function TodayClient({
             <Trophy className="w-4 h-4 text-amber-500 animate-pulse" /> Cumulative Standings So Far
           </h3>
           <span className="text-[10px] text-slate-550 dark:text-slate-500 font-extrabold uppercase tracking-wider">
-            as of {selectedDate}
+            as of {getLocalDateDisplay(selectedDate)}
           </span>
         </div>
 
