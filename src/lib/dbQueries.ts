@@ -267,113 +267,100 @@ export async function getAllUsers(): Promise<DBUser[]> {
 }
 
 export async function getAllMatches(): Promise<DBMatch[]> {
-  if (isMockMode) {
+  const isMock = isMockMode;
+  let matchesList: DBMatch[] = [];
+  let updateMatchesCallback: (updatedMatches: any[]) => Promise<void> = async () => {};
+
+  if (isMock) {
     const data = readLocalDb();
-    
-    // Auto-update matches that have ended based on games.json
-    let hasUpdates = false;
-    const now = new Date();
-    
-    try {
-      const gamesFilePath = path.join(process.cwd(), 'src', 'lib', 'games.json');
-      if (fs.existsSync(gamesFilePath)) {
-        const gamesData = JSON.parse(fs.readFileSync(gamesFilePath, 'utf8'));
-        const gamesList = gamesData.games || [];
-        
-        data.matches.forEach((match: any) => {
-          if (!match.finished) {
-            const kickoff = new Date(match.kickoffAt);
-            // Consider the match finished 2 hours after kickoff
-            const endsAt = new Date(kickoff.getTime() + 2 * 60 * 60 * 1000);
-            if (now >= endsAt) {
-              const matchedGame = gamesList.find((g: any) => String(g.id) === String(match.id));
-              if (matchedGame && (matchedGame.finished === 'TRUE' || matchedGame.finished === true)) {
-                const hs = parseInt(matchedGame.home_score, 10);
-                const as = parseInt(matchedGame.away_score, 10);
-                if (!isNaN(hs) && !isNaN(as)) {
-                  match.finished = true;
-                  match.homeScore = hs;
-                  match.awayScore = as;
-                  if (hs > as) {
-                    match.winner = 'home';
-                  } else if (as > hs) {
-                    match.winner = 'away';
-                  } else {
-                    match.winner = 'draw';
-                  }
-                  hasUpdates = true;
-                }
-              }
-            }
-          }
-        });
-      }
-    } catch (err) {
-      console.error('Error auto-updating matches from games.json:', err);
-    }
-    
-    if (hasUpdates) {
+    matchesList = data.matches;
+    updateMatchesCallback = async (updatedMatches) => {
+      data.matches = updatedMatches;
       writeLocalDb(data);
-    }
-    
-    return data.matches;
+    };
   } else {
     const dbMatches = await db.select().from(matches);
-    let hasUpdates = false;
-    const now = new Date();
+    matchesList = dbMatches.map((m) => ({
+      ...m,
+      kickoffAt: m.kickoffAt instanceof Date ? m.kickoffAt.toISOString() : new Date(m.kickoffAt).toISOString(),
+    }));
+    updateMatchesCallback = async (updatedMatches) => {
+      // Find matches that changed their finished status to true and update them in DB
+      for (const m of updatedMatches) {
+        const original = dbMatches.find(dm => dm.id === m.id);
+        if (original && !original.finished && m.finished) {
+          await db
+            .update(matches)
+            .set({
+              finished: true,
+              homeScore: m.homeScore,
+              awayScore: m.awayScore,
+              winner: m.winner,
+            })
+            .where(eq(matches.id, m.id));
+        }
+      }
+    };
+  }
 
+  // Fetch latest live match results from the internet
+  let gamesList: any[] = [];
+  try {
+    const res = await fetch('https://worldcup26.ir/get/games', {
+      next: { revalidate: 60 } // Cache API response for 60 seconds
+    });
+    if (res.ok) {
+      const apiData = await res.json();
+      gamesList = apiData.games || [];
+    }
+  } catch (err) {
+    console.error('Error fetching live scores from worldcup26.ir:', err);
+  }
+
+  // Fallback to local games.json if API fetch failed
+  if (gamesList.length === 0) {
     try {
       const gamesFilePath = path.join(process.cwd(), 'src', 'lib', 'games.json');
       if (fs.existsSync(gamesFilePath)) {
         const gamesData = JSON.parse(fs.readFileSync(gamesFilePath, 'utf8'));
-        const gamesList = gamesData.games || [];
+        gamesList = gamesData.games || [];
+      }
+    } catch (err) {
+      console.error('Error reading games.json fallback:', err);
+    }
+  }
 
-        for (const match of dbMatches) {
-          if (!match.finished) {
-            const kickoff = new Date(match.kickoffAt);
-            // Consider the match finished 2 hours after kickoff
-            const endsAt = new Date(kickoff.getTime() + 2 * 60 * 60 * 1000);
-            if (now >= endsAt) {
-              const matchedGame = gamesList.find((g: any) => String(g.id) === String(match.id));
-              if (matchedGame && (matchedGame.finished === 'TRUE' || matchedGame.finished === true)) {
-                const hs = parseInt(matchedGame.home_score, 10);
-                const as = parseInt(matchedGame.away_score, 10);
-                if (!isNaN(hs) && !isNaN(as)) {
-                  const winner = hs > as ? 'home' : as > hs ? 'away' : 'draw';
-                  
-                  // Update match in PostgreSQL database
-                  await db
-                    .update(matches)
-                    .set({
-                      finished: true,
-                      homeScore: hs,
-                      awayScore: as,
-                      winner,
-                    })
-                    .where(eq(matches.id, match.id));
+  // Process auto-updates
+  let hasUpdates = false;
+  const now = new Date();
 
-                  // Update current array item
-                  match.finished = true;
-                  match.homeScore = hs;
-                  match.awayScore = as;
-                  match.winner = winner;
-
-                  hasUpdates = true;
-                }
-              }
-            }
+  matchesList.forEach((match: any) => {
+    if (!match.finished) {
+      const kickoff = new Date(match.kickoffAt);
+      // Consider match finished 2 hours after kickoff
+      const endsAt = new Date(kickoff.getTime() + 2 * 60 * 60 * 1000);
+      if (now >= endsAt) {
+        const matchedGame = gamesList.find((g: any) => String(g.id) === String(match.id));
+        if (matchedGame && (matchedGame.finished === 'TRUE' || matchedGame.finished === true)) {
+          const hs = parseInt(matchedGame.home_score, 10);
+          const as = parseInt(matchedGame.away_score, 10);
+          if (!isNaN(hs) && !isNaN(as)) {
+            match.finished = true;
+            match.homeScore = hs;
+            match.awayScore = as;
+            match.winner = hs > as ? 'home' : as > hs ? 'away' : 'draw';
+            hasUpdates = true;
           }
         }
       }
-    } catch (err) {
-      console.error('Error auto-updating DB matches from games.json:', err);
     }
+  });
 
-    return dbMatches.map((m) => ({
-      ...m,
-      kickoffAt: m.kickoffAt.toISOString(),
-    }));
+  if (hasUpdates) {
+    await updateMatchesCallback(matchesList);
   }
+
+  return matchesList;
 }
 
 export async function getAllPredictions(): Promise<DBPrediction[]> {
