@@ -10,6 +10,7 @@ export const dynamic = 'force-dynamic';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const force = searchParams.get('force') === 'true';
+  const reseedHistorical = searchParams.get('reseed_historical') === 'true';
 
   const logs: string[] = [];
   let success = true;
@@ -104,47 +105,61 @@ export async function GET(request: Request) {
     const userCheck = await db.select().from(schema.users).limit(1);
     const alreadySeeded = userCheck.length > 0;
 
-    if (alreadySeeded && !force) {
-      logs.push('⚠️ Database is already seeded. Seeding skipped. (Use /api/init-db?force=true to reset and re-seed)');
+    if (alreadySeeded && !force && !reseedHistorical) {
+      logs.push('⚠️ Database is already seeded. Seeding skipped. (Use /api/init-db?force=true to reset and re-seed, or /api/init-db?reseed_historical=true to correct historical predictions without losing users/new predictions)');
       return renderHtmlResponse(success, logs);
     }
 
-    if (force) {
-      logs.push('Wiping old data from tables...');
-      await db.delete(schema.predictions);
-      await db.delete(schema.matches);
-      await db.delete(schema.users);
-      await db.delete(schema.settings);
-      logs.push('✅ Old data wiped successfully.');
-    }
-
-    logs.push('Seeding database tables...');
-
-    // A. Seed Users
-    const usersToSeed = [
-      { username: 'swarnesh_admin', name: 'Swaggy', password: 'adminpassword126', isAdmin: true, hasPrivilege: false },
-      { username: 'swarnesh', name: 'Swaggy', password: 'swarneshpassword126', isAdmin: false, hasPrivilege: true },
-      { username: 'varun', name: 'Motesh', password: 'varunpassword126', isAdmin: false, hasPrivilege: true },
-      { username: 'piyush', name: 'PRMJ', password: 'piyushpassword126', isAdmin: false, hasPrivilege: false },
-      { username: 'praveen', name: 'Illad', password: 'praveenpassword126', isAdmin: false, hasPrivilege: true },
-      { username: 'shaunak', name: 'Bokya', password: 'shaunakpassword126', isAdmin: false, hasPrivilege: false },
-      { username: 'nachiket', name: 'Naiket', password: 'nachiketpassword126', isAdmin: false, hasPrivilege: true },
-    ];
-
     const userMap = new Map<string, number>();
-    for (const u of usersToSeed) {
-      const hashedPassword = bcrypt.hashSync(u.password, 10);
-      const [insertedUser] = await db.insert(schema.users).values({
-        username: u.username.toLowerCase().trim(),
-        name: u.name,
-        password: hashedPassword,
-        isAdmin: u.isAdmin,
-        hasSpecialPrivilege: u.hasPrivilege,
-        specialPrivilegeUsed: false,
-      }).returning({ id: schema.users.id });
+
+    if (reseedHistorical) {
+      logs.push('Reseeding historical predictions only. Fetching existing users...');
+      const dbUsers = await db.select().from(schema.users);
+      for (const u of dbUsers) {
+        userMap.set(u.username.toLowerCase().trim(), u.id);
+      }
+      logs.push(`Loaded ${dbUsers.length} existing users from DB.`);
       
-      userMap.set(u.username.toLowerCase().trim(), insertedUser.id);
-      logs.push(`👤 Seeded user: ${u.username} (ID: ${insertedUser.id})`);
+      logs.push('Removing existing predictions for matches 1-28...');
+      await db.execute(sql`DELETE FROM predictions WHERE match_id <= 28`);
+      logs.push('✅ Old historical predictions wiped.');
+    } else {
+      if (force) {
+        logs.push('Wiping old data from tables...');
+        await db.delete(schema.predictions);
+        await db.delete(schema.matches);
+        await db.delete(schema.users);
+        await db.delete(schema.settings);
+        logs.push('✅ Old data wiped successfully.');
+      }
+
+      logs.push('Seeding database tables...');
+
+      // A. Seed Users
+      const usersToSeed = [
+        { username: 'swarnesh_admin', name: 'Swaggy', password: 'adminpassword126', isAdmin: true, hasPrivilege: false },
+        { username: 'swarnesh', name: 'Swaggy', password: 'swarneshpassword126', isAdmin: false, hasPrivilege: true },
+        { username: 'varun', name: 'Motesh', password: 'varunpassword126', isAdmin: false, hasPrivilege: true },
+        { username: 'piyush', name: 'PRMJ', password: 'piyushpassword126', isAdmin: false, hasPrivilege: false },
+        { username: 'praveen', name: 'Illad', password: 'praveenpassword126', isAdmin: false, hasPrivilege: true },
+        { username: 'shaunak', name: 'Bokya', password: 'shaunakpassword126', isAdmin: false, hasPrivilege: false },
+        { username: 'nachiket', name: 'Naiket', password: 'nachiketpassword126', isAdmin: false, hasPrivilege: true },
+      ];
+
+      for (const u of usersToSeed) {
+        const hashedPassword = bcrypt.hashSync(u.password, 10);
+        const [insertedUser] = await db.insert(schema.users).values({
+          username: u.username.toLowerCase().trim(),
+          name: u.name,
+          password: hashedPassword,
+          isAdmin: u.isAdmin,
+          hasSpecialPrivilege: u.hasPrivilege,
+          specialPrivilegeUsed: false,
+        }).returning({ id: schema.users.id });
+        
+        userMap.set(u.username.toLowerCase().trim(), insertedUser.id);
+        logs.push(`👤 Seeded user: ${u.username} (ID: ${insertedUser.id})`);
+      }
     }
 
     // B. Match Results Map
@@ -224,31 +239,33 @@ export async function GET(request: Request) {
     ];
 
     // C. Seed Matches
-    for (const f of FIXTURES) {
-      const result = matchResults[f.id];
-      await db.insert(schema.matches).values({
-        id: f.id,
-        stage: f.stage,
-        group: f.group,
-        homeTeam: f.homeTeam,
-        awayTeam: f.awayTeam,
-        kickoffAt: new Date(f.kickoffAt),
-        venue: f.venue,
-        finished: !!result,
-        homeScore: result ? result.homeScore : null,
-        awayScore: result ? result.awayScore : null,
-        winner: result ? result.winner : null,
-        isAnonymous: false,
-        anonymityRequested: false,
-      });
+    if (!reseedHistorical) {
+      for (const f of FIXTURES) {
+        const result = matchResults[f.id];
+        await db.insert(schema.matches).values({
+          id: f.id,
+          stage: f.stage,
+          group: f.group,
+          homeTeam: f.homeTeam,
+          awayTeam: f.awayTeam,
+          kickoffAt: new Date(f.kickoffAt),
+          venue: f.venue,
+          finished: !!result,
+          homeScore: result ? result.homeScore : null,
+          awayScore: result ? result.awayScore : null,
+          winner: result ? result.winner : null,
+          isAnonymous: false,
+          anonymityRequested: false,
+        });
+      }
+      logs.push(`⚽ Seeded ${FIXTURES.length} tournament matches.`);
     }
-    logs.push(`⚽ Seeded ${FIXTURES.length} tournament matches.`);
 
     // D. Seed Predictions
     let predictionCount = 0;
     for (let index = 0; index < chronoIds.length; index++) {
       const dbId = chronoIds[index];
-      const picks = userPicks[index];
+      const picks = userPicks[dbId - 1];
       for (const [mockIdStr, pick] of Object.entries(picks)) {
         const mockId = parseInt(mockIdStr, 10);
         const username = mockIdToUsername[mockId];
@@ -269,11 +286,13 @@ export async function GET(request: Request) {
     logs.push(`🗳️ Seeded ${predictionCount} historical predictions (Matches 1-28).`);
 
     // E. Seed Settings
-    await db.insert(schema.settings).values([
-      { key: 'anonymous_mode', value: 'false' },
-      { key: 'exact_score_bonus', value: 'false' },
-    ]);
-    logs.push('⚙️ Seeded default settings.');
+    if (!reseedHistorical) {
+      await db.insert(schema.settings).values([
+        { key: 'anonymous_mode', value: 'false' },
+        { key: 'exact_score_bonus', value: 'false' },
+      ]);
+      logs.push('⚙️ Seeded default settings.');
+    }
 
     logs.push('🎉 Database seeding completed successfully!');
   } catch (err: any) {

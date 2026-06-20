@@ -168,7 +168,7 @@ function getInitialMockState() {
       match.awayScore = resultInfo.awayScore;
     }
 
-    const picks = userPicks[index];
+    const picks = userPicks[dbId - 1];
     for (const [userIdStr, pick] of Object.entries(picks)) {
       const userId = parseInt(userIdStr, 10);
       initialPredictions.push({
@@ -287,7 +287,7 @@ export async function getAllMatches(): Promise<DBMatch[]> {
             const endsAt = new Date(kickoff.getTime() + 2 * 60 * 60 * 1000);
             if (now >= endsAt) {
               const matchedGame = gamesList.find((g: any) => String(g.id) === String(match.id));
-              if (matchedGame) {
+              if (matchedGame && (matchedGame.finished === 'TRUE' || matchedGame.finished === true)) {
                 const hs = parseInt(matchedGame.home_score, 10);
                 const as = parseInt(matchedGame.away_score, 10);
                 if (!isNaN(hs) && !isNaN(as)) {
@@ -335,7 +335,7 @@ export async function getAllMatches(): Promise<DBMatch[]> {
             const endsAt = new Date(kickoff.getTime() + 2 * 60 * 60 * 1000);
             if (now >= endsAt) {
               const matchedGame = gamesList.find((g: any) => String(g.id) === String(match.id));
-              if (matchedGame) {
+              if (matchedGame && (matchedGame.finished === 'TRUE' || matchedGame.finished === true)) {
                 const hs = parseInt(matchedGame.home_score, 10);
                 const as = parseInt(matchedGame.away_score, 10);
                 if (!isNaN(hs) && !isNaN(as)) {
