@@ -128,19 +128,29 @@ export async function GET(request: Request) {
       await db.execute(sql`UPDATE matches SET finished = false, home_score = null, away_score = null, winner = null WHERE id > 28`);
       logs.push('✅ Matches > 28 reset to unfinished.');
 
-      logs.push("Correcting Illad's (praveen) vote for match 31 to United States...");
-      await db.execute(sql`
-        INSERT INTO predictions (user_id, match_id, pick)
-        VALUES ((SELECT id FROM users WHERE username = 'praveen'), 31, 'home')
-        ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'home'
-      `);
+      const praveenUser = dbUsers.find(u => u.username.toLowerCase().trim() === 'praveen');
+      if (praveenUser) {
+        logs.push("Correcting Illad's (praveen) vote for match 31 to United States...");
+        await db.execute(sql`
+          INSERT INTO predictions (user_id, match_id, pick)
+          VALUES (${praveenUser.id}, 31, 'home')
+          ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'home'
+        `);
+      } else {
+        logs.push("⚠️ WARNING: User 'praveen' not found, skipping vote override for match 31.");
+      }
 
-      logs.push("Adding Bokya's (shaunak) vote for match 32 as Draw...");
-      await db.execute(sql`
-        INSERT INTO predictions (user_id, match_id, pick)
-        VALUES ((SELECT id FROM users WHERE username = 'shaunak'), 32, 'draw')
-        ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'draw'
-      `);
+      const shaunakUser = dbUsers.find(u => u.username.toLowerCase().trim() === 'shaunak');
+      if (shaunakUser) {
+        logs.push("Adding Bokya's (shaunak) vote for match 32 as Draw...");
+        await db.execute(sql`
+          INSERT INTO predictions (user_id, match_id, pick)
+          VALUES (${shaunakUser.id}, 32, 'draw')
+          ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'draw'
+        `);
+      } else {
+        logs.push("⚠️ WARNING: User 'shaunak' not found, skipping vote override for match 32.");
+      }
     } else {
       if (force) {
         logs.push('Wiping old data from tables...');
@@ -281,6 +291,7 @@ export async function GET(request: Request) {
 
     // D. Seed Predictions
     let predictionCount = 0;
+    const skippedUsers = new Set<string>();
     for (let index = 0; index < chronoIds.length; index++) {
       const dbId = chronoIds[index];
       const picks = userPicks[dbId - 1];
@@ -297,9 +308,14 @@ export async function GET(request: Request) {
               updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
             });
             predictionCount++;
+          } else {
+            skippedUsers.add(username);
           }
         }
       }
+    }
+    if (skippedUsers.size > 0) {
+      logs.push(`⚠️ WARNING: Did not seed predictions for the following usernames (not found in DB): ${Array.from(skippedUsers).join(', ')}`);
     }
     logs.push(`🗳️ Seeded ${predictionCount} historical predictions (Matches 1-28).`);
 

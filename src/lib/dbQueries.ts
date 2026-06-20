@@ -309,7 +309,7 @@ export async function getAllMatches(): Promise<DBMatch[]> {
       for (const m of updatedMatches) {
         const original = dbMatches.find(dm => dm.id === m.id);
         if (original) {
-          const needsDbUpdate = !original.finished || 
+          const needsDbUpdate = original.finished !== m.finished || 
                                 original.homeScore !== m.homeScore || 
                                 original.awayScore !== m.awayScore || 
                                 original.winner !== m.winner;
@@ -318,7 +318,7 @@ export async function getAllMatches(): Promise<DBMatch[]> {
             await db
               .update(matches)
               .set({
-                finished: true,
+                finished: m.finished,
                 homeScore: m.homeScore,
                 awayScore: m.awayScore,
                 winner: m.winner,
@@ -362,30 +362,44 @@ export async function getAllMatches(): Promise<DBMatch[]> {
   const now = new Date();
 
   matchesList.forEach((match: any) => {
-    const kickoff = new Date(match.kickoffAt);
-    // Consider match finished 2 hours after kickoff
-    const endsAt = new Date(kickoff.getTime() + 2 * 60 * 60 * 1000);
-    if (now >= endsAt) {
-      const matchedGame = gamesList.find((g: any) => String(g.id) === String(match.id));
-      if (matchedGame && (matchedGame.finished === 'TRUE' || matchedGame.finished === true)) {
-        const hs = parseInt(matchedGame.home_score, 10);
-        const as = parseInt(matchedGame.away_score, 10);
-        if (!isNaN(hs) && !isNaN(as)) {
-          const apiWinner = hs > as ? 'home' : as > hs ? 'away' : 'draw';
-          
-          // Self-heal: update if database has wrong scores or is unfinished
-          const needsUpdate = !match.finished || 
-                              match.homeScore !== hs || 
-                              match.awayScore !== as || 
-                              match.winner !== apiWinner;
+    const matchedGame = gamesList.find((g: any) => String(g.id) === String(match.id));
+    if (matchedGame) {
+      const isApiFinished = matchedGame.finished === 'TRUE' || matchedGame.finished === true;
+      if (isApiFinished) {
+        const kickoff = new Date(match.kickoffAt);
+        const endsAt = new Date(kickoff.getTime() + 2 * 60 * 60 * 1000);
+        // Only mark finished if current time is past kickoff/expected end
+        // (to prevent any API anomalies from finishing future games)
+        if (now >= endsAt) {
+          const hs = parseInt(matchedGame.home_score, 10);
+          const as = parseInt(matchedGame.away_score, 10);
+          if (!isNaN(hs) && !isNaN(as)) {
+            const apiWinner = hs > as ? 'home' : as > hs ? 'away' : 'draw';
+            
+            // Self-heal: update if database has wrong scores or is unfinished
+            const needsUpdate = !match.finished || 
+                                match.homeScore !== hs || 
+                                match.awayScore !== as || 
+                                match.winner !== apiWinner;
 
-          if (needsUpdate) {
-            match.finished = true;
-            match.homeScore = hs;
-            match.awayScore = as;
-            match.winner = apiWinner;
-            hasUpdates = true;
+            if (needsUpdate) {
+              match.finished = true;
+              match.homeScore = hs;
+              match.awayScore = as;
+              match.winner = apiWinner;
+              hasUpdates = true;
+            }
           }
+        }
+      } else {
+        // Self-heal: if the database has it finished but API says it's not finished,
+        // reset it back to unfinished.
+        if (match.finished) {
+          match.finished = false;
+          match.homeScore = null;
+          match.awayScore = null;
+          match.winner = null;
+          hasUpdates = true;
         }
       }
     }
