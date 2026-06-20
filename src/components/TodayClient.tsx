@@ -475,55 +475,86 @@ export default function TodayClient({
                     </div>
 
                     <div className="space-y-1">
-                        {matchPredictions.length === 0 ? (
-                          <div className="text-[11px] text-slate-500 text-center italic">No one voted on this match</div>
-                        ) : (
-                          <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
-                            {matchPredictions.map((pred) => {
-                              const userName = userMap.get(pred.userId) || `User ${pred.userId}`;
-                              let pickLabel = '';
-                              
-                              if (isKnockout) {
-                                pickLabel = pred.pick === 'home_advance' ? match.homeTeam : match.awayTeam;
-                              } else {
-                                pickLabel = pred.pick === 'home' ? match.homeTeam : pred.pick === 'away' ? match.awayTeam : 'Draw';
+                        <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
+                          {(() => {
+                            const players = users.filter((u) => !u.isAdmin);
+                            const sortedPlayers = [...players].sort((a, b) => a.id - b.id);
+
+                            return sortedPlayers.map((player) => {
+                              const pred = matchPredictions.find((p) => p.userId === player.id);
+                              let pickLabel = 'No Vote';
+                              let badgeColor = '';
+                              let pointsLabel = '';
+
+                              if (pred) {
+                                if (isKnockout) {
+                                  pickLabel = pred.pick === 'home_advance' ? match.homeTeam : match.awayTeam;
+                                } else {
+                                  pickLabel = pred.pick === 'home' ? match.homeTeam : pred.pick === 'away' ? match.awayTeam : 'Draw';
+                                }
                               }
 
-                              const isSelf = pred.userId === currentUserId;
+                              const isSelf = player.id === currentUserId;
 
-                              let isCorrect = false;
                               if (match.finished) {
-                                if (isKnockout) {
-                                  isCorrect = (pred.pick === 'home_advance' ? 'home' : 'away') === match.winner;
+                                let isCorrect = false;
+                                if (pred) {
+                                  if (isKnockout) {
+                                    isCorrect = (pred.pick === 'home_advance' ? 'home' : 'away') === match.winner;
+                                  } else {
+                                    isCorrect = pred.pick === match.winner;
+                                  }
+                                }
+
+                                if (pred) {
+                                  if (isCorrect) {
+                                    pointsLabel = '+1';
+                                    badgeColor = 'bg-emerald-500/10 text-emerald-605 dark:text-emerald-400 border-emerald-500/20';
+                                  } else {
+                                    pointsLabel = '0';
+                                    badgeColor = 'bg-slate-500/10 text-slate-500 dark:text-slate-400 border-slate-500/20';
+                                  }
                                 } else {
-                                  isCorrect = pred.pick === match.winner;
+                                  pointsLabel = '-1';
+                                  badgeColor = 'bg-rose-500/10 text-rose-500 border-rose-500/20';
+                                }
+                              } else {
+                                if (pred) {
+                                  badgeColor = 'bg-white dark:bg-slate-900 border-slate-250 dark:border-slate-800 text-slate-800 dark:text-slate-200 shadow-sm';
+                                } else {
+                                  badgeColor = 'bg-slate-100/50 dark:bg-slate-950/20 border-slate-200 dark:border-slate-900 text-slate-400';
                                 }
                               }
 
                               return (
                                 <div
-                                  key={pred.userId}
+                                  key={player.id}
                                   className={`flex justify-between items-center py-0.5 ${
                                     isSelf ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-slate-800 dark:text-slate-200'
                                   }`}
                                 >
-                                  <span className="truncate">{userName}</span>
-                                  <span
-                                    className={`font-black shrink-0 text-[10px] px-2 py-0.5 rounded border ${
-                                      match.finished
-                                        ? isCorrect
-                                          ? 'bg-emerald-500/10 text-emerald-605 dark:text-emerald-400 border-emerald-500/20'
-                                          : 'bg-rose-500/10 text-rose-605 dark:text-rose-400 border-rose-500/20'
-                                        : 'bg-white dark:bg-slate-900 border-slate-250 dark:border-slate-800 shadow-sm'
-                                    }`}
-                                  >
-                                    {pickLabel}
-                                  </span>
+                                  <span className="truncate">{player.name}</span>
+                                  <div className="flex items-center gap-1.5 shrink-0">
+                                    <span className={`font-black text-[9px] px-2 py-0.5 rounded border ${badgeColor}`}>
+                                      {pickLabel}
+                                    </span>
+                                    {pointsLabel && (
+                                      <span className={`text-[9px] font-black w-6 text-center rounded border py-0.5 ${
+                                        pointsLabel === '+1'
+                                          ? 'bg-emerald-500/15 text-emerald-600 border-emerald-500/30'
+                                          : pointsLabel === '-1'
+                                          ? 'bg-rose-500/15 text-rose-505 border-rose-500/30'
+                                          : 'bg-slate-100 text-slate-550 border-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:border-slate-800'
+                                      }`}>
+                                        {pointsLabel}
+                                      </span>
+                                    )}
+                                  </div>
                                 </div>
                               );
-                            })}
-                          </div>
-                        )}
+                            });
+                          })()}
+                        </div>
                       </div>
                   </div>
                 )}

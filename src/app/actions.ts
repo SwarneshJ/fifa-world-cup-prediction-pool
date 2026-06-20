@@ -249,20 +249,31 @@ export async function getStandings() {
       let sumVoteTimestamps = 0;
       const formTrail: { matchId: number; date: Date; correct: boolean }[] = [];
 
-      userPreds.forEach((p) => {
-        const match = matchMap.get(p.matchId);
-        if (!match || !match.finished) return;
+      allMatches.forEach((match) => {
+        if (!match.finished) return;
+
+        const pred = userPreds.find((p) => p.matchId === match.id);
+        
+        if (!pred) {
+          totalPoints -= 1;
+          formTrail.push({
+            matchId: match.id,
+            date: new Date(match.kickoffAt),
+            correct: false,
+          });
+          return;
+        }
 
         const isKnockout = match.stage !== 'group';
         let outcomeCorrect = false;
 
         if (isKnockout) {
-          const predictedWinner = p.pick === 'home_advance' ? 'home' : 'away';
+          const predictedWinner = pred.pick === 'home_advance' ? 'home' : 'away';
           if (predictedWinner === match.winner) {
             outcomeCorrect = true;
           }
         } else {
-          if (p.pick === match.winner) {
+          if (pred.pick === match.winner) {
             outcomeCorrect = true;
           }
         }
@@ -272,7 +283,7 @@ export async function getStandings() {
           totalPoints += 1;
         }
 
-        sumVoteTimestamps += new Date(p.updatedAt).getTime();
+        sumVoteTimestamps += new Date(pred.updatedAt).getTime();
 
         formTrail.push({
           matchId: match.id,

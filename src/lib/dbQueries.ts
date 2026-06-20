@@ -183,6 +183,26 @@ function getInitialMockState() {
     }
   });
 
+  // Add manual picks for Match 31 and 32
+  initialPredictions.push({
+    id: predIdCounter++,
+    userId: 5, // praveen (Illad)
+    matchId: 31,
+    pick: 'home',
+    predictedHomeScore: null,
+    predictedAwayScore: null,
+    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+  });
+  initialPredictions.push({
+    id: predIdCounter++,
+    userId: 6, // shaunak (Bokya)
+    matchId: 32,
+    pick: 'draw',
+    predictedHomeScore: null,
+    predictedAwayScore: null,
+    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+  });
+
   const initialSettings = {
     anonymous_mode: 'false',
     exact_score_bonus: 'false',

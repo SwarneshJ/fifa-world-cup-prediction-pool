@@ -123,6 +123,24 @@ export async function GET(request: Request) {
       logs.push('Removing existing predictions for matches 1-28...');
       await db.execute(sql`DELETE FROM predictions WHERE match_id <= 28`);
       logs.push('✅ Old historical predictions wiped.');
+
+      logs.push('Resetting matches > 28 back to unfinished to clear incorrect placeholder 0-0 completions...');
+      await db.execute(sql`UPDATE matches SET finished = false, home_score = null, away_score = null, winner = null WHERE id > 28`);
+      logs.push('✅ Matches > 28 reset to unfinished.');
+
+      logs.push("Correcting Illad's (praveen) vote for match 31 to United States...");
+      await db.execute(sql`
+        INSERT INTO predictions (user_id, match_id, pick)
+        VALUES ((SELECT id FROM users WHERE username = 'praveen'), 31, 'home')
+        ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'home'
+      `);
+
+      logs.push("Adding Bokya's (shaunak) vote for match 32 as Draw...");
+      await db.execute(sql`
+        INSERT INTO predictions (user_id, match_id, pick)
+        VALUES ((SELECT id FROM users WHERE username = 'shaunak'), 32, 'draw')
+        ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'draw'
+      `);
     } else {
       if (force) {
         logs.push('Wiping old data from tables...');

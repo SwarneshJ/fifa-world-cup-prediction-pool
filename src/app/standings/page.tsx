@@ -137,7 +137,8 @@ export default async function StandingsPage() {
         </h4>
         <ul className="list-disc list-inside space-y-1 text-[11px] font-medium">
           <li>Correct Match Outcome (Win/Draw/Away): <span className="text-emerald-600 dark:text-emerald-400 font-extrabold">+1 point</span></li>
-          <li>Incorrect prediction: <span className="text-rose-500 font-semibold">0 points</span></li>
+          <li>Incorrect prediction: <span className="text-slate-500 font-semibold">0 points</span></li>
+          <li>No prediction (did not vote): <span className="text-rose-600 dark:text-rose-400 font-extrabold">-1 point</span></li>
         </ul>
       </div>
     </div>

@@ -169,6 +169,25 @@ async function main() {
   }
   console.log('Seeded prediction picks.');
 
+  // Seeding specific predictions for matches 31 and 32
+  console.log('Seeding specific predictions for matches 31 and 32...');
+  const praveenId = userMap.get('praveen');
+  if (praveenId) {
+    await sql`
+      INSERT INTO predictions (user_id, match_id, pick)
+      VALUES (${praveenId}, 31, 'home')
+      ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'home'
+    `;
+  }
+  const shaunakId = userMap.get('shaunak');
+  if (shaunakId) {
+    await sql`
+      INSERT INTO predictions (user_id, match_id, pick)
+      VALUES (${shaunakId}, 32, 'draw')
+      ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'draw'
+    `;
+  }
+
   console.log('Seeding settings...');
   await db.insert(schema.settings).values([
     { key: 'anonymous_mode', value: 'false' },
