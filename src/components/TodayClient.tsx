@@ -223,6 +223,7 @@ export default function TodayClient({
 
   // Calculate cumulative scores so far
   const getCumulativeScores = () => {
+    const selectedIdx = dates.indexOf(selectedDate);
     const players = users.filter((u) => !u.isAdmin);
     const scores = players.map((u) => {
       const userPreds = predictions.filter((p) => p.userId === u.id);
@@ -232,6 +233,13 @@ export default function TodayClient({
 
       initialMatches.forEach((match) => {
         if (!match.finished) return;
+
+        // Only include matches that occurred on or before the selected date
+        const matchDateStr = getLocalDateString(match.kickoffAt);
+        const matchDateIdx = dates.indexOf(matchDateStr);
+        if (matchDateIdx === -1 || matchDateIdx > selectedIdx) {
+          return;
+        }
 
         const pred = userPreds.find((p) => p.matchId === match.id);
         if (!pred) {
