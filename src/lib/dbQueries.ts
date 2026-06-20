@@ -332,6 +332,7 @@ export async function getAllMatches(): Promise<DBMatch[]> {
 
   // Fetch latest live match results from the internet
   let gamesList: any[] = [];
+  let isLiveAPI = false;
   try {
     const res = await fetch('https://worldcup26.ir/get/games', {
       next: { revalidate: 60 } // Cache API response for 60 seconds
@@ -339,6 +340,7 @@ export async function getAllMatches(): Promise<DBMatch[]> {
     if (res.ok) {
       const apiData = await res.json();
       gamesList = apiData.games || [];
+      isLiveAPI = true;
     }
   } catch (err) {
     console.error('Error fetching live scores from worldcup26.ir:', err);
@@ -393,8 +395,9 @@ export async function getAllMatches(): Promise<DBMatch[]> {
         }
       } else {
         // Self-heal: if the database has it finished but API says it's not finished,
-        // reset it back to unfinished.
-        if (match.finished) {
+        // reset it back to unfinished. ONLY do this if we successfully fetched the live API,
+        // since the local games.json fallback is static and outdated.
+        if (isLiveAPI && match.finished) {
           match.finished = false;
           match.homeScore = null;
           match.awayScore = null;
