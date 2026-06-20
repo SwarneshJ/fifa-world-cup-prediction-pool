@@ -51,7 +51,8 @@ async function main() {
 
   // Pre-seed results and predictions for Matches 1 to 28 (Chronological)
   const chronoIds = [
-    1, 2, 3, 4, 8, 7, 5, 6, 10, 11, 9, 12, 14, 15, 16, 13, 17, 18, 19, 20, 21, 22, 24, 23, 28, 26, 27, 25
+    1, 2, 3, 4, 8, 7, 5, 6, 10, 11, 9, 12, 14, 15, 16, 13, 17, 18, 19, 20, 21, 22, 24, 23, 28, 26, 27, 25,
+    31, 30, 29, 32, 35, 33, 34, 36
   ];
 
   const matchResults: Record<number, { winner: 'home' | 'draw' | 'away'; homeScore: number; awayScore: number }> = {
@@ -124,6 +125,14 @@ async function main() {
     { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'draw', 7: 'home' }, // M26
     { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M27
     { 2: 'home', 3: 'draw', 4: 'home', 5: 'draw', 6: 'draw', 7: 'draw' }, // M28
+    { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M29 (USA vs Australia, FIFA 31)
+    { 2: 'away', 3: 'away', 4: 'away', 5: 'away', 6: 'away', 7: 'away' }, // M30 (Scotland vs Morocco, FIFA 30)
+    { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M31 (Brazil vs Haiti, FIFA 29)
+    { 2: 'home', 3: 'draw', 4: 'home', 5: 'home', 6: 'draw', 7: 'draw' }, // M32 (Turkey vs Paraguay, FIFA 32)
+    { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M33 (Netherlands vs Sweden, FIFA 35)
+    { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M34 (Germany vs Ivory Coast, FIFA 33)
+    { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M35 (Ecuador vs Curaçao, FIFA 34)
+    { 2: 'away', 3: 'away', 4: 'away', 5: 'away', 6: 'away', 7: 'away' }, // M36 (Tunisia vs Japan, FIFA 36)
   ];
 
   console.log('Seeding matches...');
@@ -169,24 +178,7 @@ async function main() {
   }
   console.log('Seeded prediction picks.');
 
-  // Seeding specific predictions for matches 31 and 32
-  console.log('Seeding specific predictions for matches 31 and 32...');
-  const praveenId = userMap.get('praveen');
-  if (praveenId) {
-    await sql`
-      INSERT INTO predictions (user_id, match_id, pick)
-      VALUES (${praveenId}, 31, 'home')
-      ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'home'
-    `;
-  }
-  const shaunakId = userMap.get('shaunak');
-  if (shaunakId) {
-    await sql`
-      INSERT INTO predictions (user_id, match_id, pick)
-      VALUES (${shaunakId}, 32, 'draw')
-      ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'draw'
-    `;
-  }
+
 
   console.log('Seeding settings...');
   await db.insert(schema.settings).values([

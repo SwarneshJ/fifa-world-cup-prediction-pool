@@ -120,37 +120,13 @@ export async function GET(request: Request) {
       }
       logs.push(`Loaded ${dbUsers.length} existing users from DB.`);
       
-      logs.push('Removing existing predictions for matches 1-28...');
-      await db.execute(sql`DELETE FROM predictions WHERE match_id <= 28`);
+      logs.push('Removing existing predictions for matches 1-36...');
+      await db.execute(sql`DELETE FROM predictions WHERE match_id <= 36`);
       logs.push('✅ Old historical predictions wiped.');
 
-      logs.push('Resetting matches > 28 back to unfinished to clear incorrect placeholder 0-0 completions...');
-      await db.execute(sql`UPDATE matches SET finished = false, home_score = null, away_score = null, winner = null WHERE id > 28`);
-      logs.push('✅ Matches > 28 reset to unfinished.');
-
-      const praveenUser = dbUsers.find(u => u.username.toLowerCase().trim() === 'praveen');
-      if (praveenUser) {
-        logs.push("Correcting Illad's (praveen) vote for match 31 to United States...");
-        await db.execute(sql`
-          INSERT INTO predictions (user_id, match_id, pick)
-          VALUES (${praveenUser.id}, 31, 'home')
-          ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'home'
-        `);
-      } else {
-        logs.push("⚠️ WARNING: User 'praveen' not found, skipping vote override for match 31.");
-      }
-
-      const shaunakUser = dbUsers.find(u => u.username.toLowerCase().trim() === 'shaunak');
-      if (shaunakUser) {
-        logs.push("Adding Bokya's (shaunak) vote for match 32 as Draw...");
-        await db.execute(sql`
-          INSERT INTO predictions (user_id, match_id, pick)
-          VALUES (${shaunakUser.id}, 32, 'draw')
-          ON CONFLICT (user_id, match_id) DO UPDATE SET pick = 'draw'
-        `);
-      } else {
-        logs.push("⚠️ WARNING: User 'shaunak' not found, skipping vote override for match 32.");
-      }
+      logs.push('Resetting matches > 32 back to unfinished to clear incorrect placeholder 0-0 completions...');
+      await db.execute(sql`UPDATE matches SET finished = false, home_score = null, away_score = null, winner = null WHERE id > 32`);
+      logs.push('✅ Matches > 32 reset to unfinished.');
     } else {
       if (force) {
         logs.push('Wiping old data from tables...');
@@ -192,7 +168,8 @@ export async function GET(request: Request) {
 
     // B. Match Results Map
     const chronoIds = [
-      1, 2, 3, 4, 8, 7, 5, 6, 10, 11, 9, 12, 14, 15, 16, 13, 17, 18, 19, 20, 21, 22, 24, 23, 28, 26, 27, 25
+      1, 2, 3, 4, 8, 7, 5, 6, 10, 11, 9, 12, 14, 15, 16, 13, 17, 18, 19, 20, 21, 22, 24, 23, 28, 26, 27, 25,
+      31, 30, 29, 32, 35, 33, 34, 36
     ];
 
     const matchResults: Record<number, { winner: 'home' | 'draw' | 'away'; homeScore: number; awayScore: number }> = {
@@ -264,6 +241,14 @@ export async function GET(request: Request) {
       { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'draw', 7: 'home' }, // M26
       { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M27
       { 2: 'home', 3: 'draw', 4: 'home', 5: 'draw', 6: 'draw', 7: 'draw' }, // M28
+      { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M29 (USA vs Australia, FIFA 31)
+      { 2: 'away', 3: 'away', 4: 'away', 5: 'away', 6: 'away', 7: 'away' }, // M30 (Scotland vs Morocco, FIFA 30)
+      { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M31 (Brazil vs Haiti, FIFA 29)
+      { 2: 'home', 3: 'draw', 4: 'home', 5: 'home', 6: 'draw', 7: 'draw' }, // M32 (Turkey vs Paraguay, FIFA 32)
+      { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M33 (Netherlands vs Sweden, FIFA 35)
+      { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M34 (Germany vs Ivory Coast, FIFA 33)
+      { 2: 'home', 3: 'home', 4: 'home', 5: 'home', 6: 'home', 7: 'home' }, // M35 (Ecuador vs Curaçao, FIFA 34)
+      { 2: 'away', 3: 'away', 4: 'away', 5: 'away', 6: 'away', 7: 'away' }, // M36 (Tunisia vs Japan, FIFA 36)
     ];
 
     // C. Seed Matches
@@ -317,7 +302,7 @@ export async function GET(request: Request) {
     if (skippedUsers.size > 0) {
       logs.push(`⚠️ WARNING: Did not seed predictions for the following usernames (not found in DB): ${Array.from(skippedUsers).join(', ')}`);
     }
-    logs.push(`🗳️ Seeded ${predictionCount} historical predictions (Matches 1-28).`);
+    logs.push(`🗳️ Seeded ${predictionCount} historical predictions (Matches 1-36).`);
 
     // E. Seed Settings
     if (!reseedHistorical) {
