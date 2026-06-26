@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { getUserByUsername } from './dbQueries';
+import { getUserByUsername, ensureDemoUserExists } from './dbQueries';
 import * as bcrypt from 'bcryptjs';
 
 if (!process.env.AUTH_SECRET && !process.env.NEXTAUTH_SECRET) {
@@ -22,6 +22,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         
         const username = String(credentials.username).toLowerCase().trim();
         const password = String(credentials.password);
+
+        if (username === 'demo') {
+          await ensureDemoUserExists();
+        }
 
         const user = await getUserByUsername(username);
         if (!user || !user.password) {

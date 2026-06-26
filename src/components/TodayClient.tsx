@@ -154,6 +154,10 @@ export default function TodayClient({
   const matchesForDate = matchesByDate[selectedDate] || [];
 
   const handlePickChange = async (matchId: number, pick: string) => {
+    if (currentUser?.username === 'demo') {
+      alert('You are in Demo Mode. Predictions are read-only.');
+      return;
+    }
     const match = initialMatches.find((m) => m.id === matchId);
     if (!match) return;
 
@@ -484,7 +488,8 @@ export default function TodayClient({
                       <div className="grid grid-cols-2 gap-2">
                         <button
                           onClick={() => handlePickChange(match.id, 'home_advance')}
-                          className={`py-2.5 px-2 text-xs font-bold rounded-xl transition-all border cursor-pointer truncate ${
+                          disabled={currentUser?.username === 'demo'}
+                          className={`py-2.5 px-2 text-xs font-bold rounded-xl transition-all border cursor-pointer truncate disabled:opacity-60 disabled:cursor-not-allowed ${
                             userPick === 'home_advance'
                               ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-black shadow-md'
                               : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm'
@@ -494,7 +499,8 @@ export default function TodayClient({
                         </button>
                         <button
                           onClick={() => handlePickChange(match.id, 'away_advance')}
-                          className={`py-2.5 px-2 text-xs font-bold rounded-xl transition-all border cursor-pointer truncate ${
+                          disabled={currentUser?.username === 'demo'}
+                          className={`py-2.5 px-2 text-xs font-bold rounded-xl transition-all border cursor-pointer truncate disabled:opacity-60 disabled:cursor-not-allowed ${
                             userPick === 'away_advance'
                               ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-black shadow-md'
                               : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm'
@@ -508,7 +514,8 @@ export default function TodayClient({
                       <div className="grid grid-cols-3 gap-2">
                         <button
                           onClick={() => handlePickChange(match.id, 'home')}
-                          className={`py-2.5 px-1 text-xs font-bold rounded-xl transition-all border cursor-pointer truncate ${
+                          disabled={currentUser?.username === 'demo'}
+                          className={`py-2.5 px-1 text-xs font-bold rounded-xl transition-all border cursor-pointer truncate disabled:opacity-60 disabled:cursor-not-allowed ${
                             userPick === 'home'
                               ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-black shadow-md'
                               : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm'
@@ -518,7 +525,8 @@ export default function TodayClient({
                         </button>
                         <button
                           onClick={() => handlePickChange(match.id, 'draw')}
-                          className={`py-2.5 px-1 text-xs font-bold rounded-xl transition-all border cursor-pointer ${
+                          disabled={currentUser?.username === 'demo'}
+                          className={`py-2.5 px-1 text-xs font-bold rounded-xl transition-all border cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
                             userPick === 'draw'
                               ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-black shadow-md'
                               : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm'
@@ -528,7 +536,8 @@ export default function TodayClient({
                         </button>
                         <button
                           onClick={() => handlePickChange(match.id, 'away')}
-                          className={`py-2.5 px-1 text-xs font-bold rounded-xl transition-all border cursor-pointer truncate ${
+                          disabled={currentUser?.username === 'demo'}
+                          className={`py-2.5 px-1 text-xs font-bold rounded-xl transition-all border cursor-pointer truncate disabled:opacity-60 disabled:cursor-not-allowed ${
                             userPick === 'away'
                               ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-black shadow-md'
                               : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm'

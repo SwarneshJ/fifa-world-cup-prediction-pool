@@ -24,6 +24,7 @@ async function main() {
     { username: 'praveen', name: 'Illad', password: 'praveenpassword126', isAdmin: false, hasPrivilege: true },
     { username: 'shaunak', name: 'Bokya', password: 'shaunakpassword126', isAdmin: false, hasPrivilege: false },
     { username: 'nachiket', name: 'Naiket', password: 'nachiketpassword126', isAdmin: false, hasPrivilege: true },
+    { username: 'demo', name: 'Demo User', password: 'demopassword', isAdmin: false, hasPrivilege: false },
   ];
 
   console.log('Clearing old data...');

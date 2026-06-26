@@ -85,6 +85,10 @@ export default function FixturesClient({
   }, [predictions, currentUserId]);
 
   const handlePickChange = async (matchId: number, pick: string) => {
+    if (currentUser?.username === 'demo') {
+      alert('You are in Demo Mode. Predictions are read-only.');
+      return;
+    }
     const match = initialMatches.find((m) => m.id === matchId);
     if (!match) return;
 
@@ -348,7 +352,8 @@ export default function FixturesClient({
                       <div className="grid grid-cols-2 gap-2">
                         <button
                           onClick={() => handlePickChange(match.id, 'home_advance')}
-                          className={`py-1.5 px-2 text-[10px] font-bold rounded-lg border transition-all cursor-pointer truncate ${
+                          disabled={currentUser?.username === 'demo'}
+                          className={`py-1.5 px-2 text-[10px] font-bold rounded-lg border transition-all cursor-pointer truncate disabled:opacity-60 disabled:cursor-not-allowed ${
                             userPick === 'home_advance'
                               ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-extrabold shadow-sm'
                               : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-850'
@@ -358,7 +363,8 @@ export default function FixturesClient({
                         </button>
                         <button
                           onClick={() => handlePickChange(match.id, 'away_advance')}
-                          className={`py-1.5 px-2 text-[10px] font-bold rounded-lg border transition-all cursor-pointer truncate ${
+                          disabled={currentUser?.username === 'demo'}
+                          className={`py-1.5 px-2 text-[10px] font-bold rounded-lg border transition-all cursor-pointer truncate disabled:opacity-60 disabled:cursor-not-allowed ${
                             userPick === 'away_advance'
                               ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-extrabold shadow-sm'
                               : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-850'
@@ -371,7 +377,8 @@ export default function FixturesClient({
                       <div className="grid grid-cols-3 gap-1.5">
                         <button
                           onClick={() => handlePickChange(match.id, 'home')}
-                          className={`py-1.5 px-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer truncate ${
+                          disabled={currentUser?.username === 'demo'}
+                          className={`py-1.5 px-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer truncate disabled:opacity-60 disabled:cursor-not-allowed ${
                             userPick === 'home'
                               ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-extrabold shadow-sm'
                               : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-850'
@@ -381,7 +388,8 @@ export default function FixturesClient({
                         </button>
                         <button
                           onClick={() => handlePickChange(match.id, 'draw')}
-                          className={`py-1.5 px-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer ${
+                          disabled={currentUser?.username === 'demo'}
+                          className={`py-1.5 px-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
                             userPick === 'draw'
                               ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-extrabold shadow-sm'
                               : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-850'
@@ -391,7 +399,8 @@ export default function FixturesClient({
                         </button>
                         <button
                           onClick={() => handlePickChange(match.id, 'away')}
-                          className={`py-1.5 px-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer truncate ${
+                          disabled={currentUser?.username === 'demo'}
+                          className={`py-1.5 px-1 text-[10px] font-bold rounded-lg border transition-all cursor-pointer truncate disabled:opacity-60 disabled:cursor-not-allowed ${
                             userPick === 'away'
                               ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-extrabold shadow-sm'
                               : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-850'

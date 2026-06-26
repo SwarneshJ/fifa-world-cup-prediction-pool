@@ -34,6 +34,9 @@ async function requireUser() {
   if (!session || !session.user || !(session.user as any).id) {
     throw new Error('Unauthorized. Please log in.');
   }
+  if ((session.user as any).username === 'demo') {
+    throw new Error('You are in Demo Mode. Making predictions or changes is disabled.');
+  }
   return session;
 }
 

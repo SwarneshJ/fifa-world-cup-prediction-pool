@@ -695,3 +695,43 @@ export function forceLocalReset() {
     fs.unlinkSync(localDbPath);
   }
 }
+
+export async function ensureDemoUserExists(): Promise<DBUser> {
+  const normUser = 'demo';
+  const hashedPassword = bcrypt.hashSync('demopassword', 10);
+
+  if (isMockMode) {
+    const data = readLocalDb();
+    let u = data.users.find((x: any) => x.username === normUser);
+    if (!u) {
+      const nextId = data.users.reduce((max: number, user: any) => Math.max(max, user.id), 0) + 1;
+      u = {
+        id: nextId,
+        username: normUser,
+        name: 'Demo User',
+        password: hashedPassword,
+        isAdmin: false,
+        hasSpecialPrivilege: false,
+        specialPrivilegeUsed: false,
+      };
+      data.users.push(u);
+      writeLocalDb(data);
+    }
+    return u;
+  } else {
+    const [dbUser] = await db.select().from(users).where(eq(users.username, normUser)).limit(1);
+    if (dbUser) {
+      return dbUser;
+    }
+    const [insertedUser] = await db.insert(users).values({
+      username: normUser,
+      name: 'Demo User',
+      password: hashedPassword,
+      isAdmin: false,
+      hasSpecialPrivilege: false,
+      specialPrivilegeUsed: false,
+    }).returning();
+    return insertedUser;
+  }
+}
+

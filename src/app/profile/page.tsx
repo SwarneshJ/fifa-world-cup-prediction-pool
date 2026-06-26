@@ -20,7 +20,7 @@ export default async function ProfilePage() {
         </p>
       </div>
 
-      <ProfileClient />
+      <ProfileClient isDemo={(session.user as any).username === 'demo'} />
     </div>
   );
 }

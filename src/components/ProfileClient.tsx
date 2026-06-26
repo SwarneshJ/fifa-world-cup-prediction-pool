@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { changeUserPassword } from '@/app/actions';
 import { Lock, CheckCircle2, AlertCircle } from 'lucide-react';
 
-export default function ProfileClient() {
+export default function ProfileClient({ isDemo = false }: { isDemo?: boolean }) {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -16,6 +16,11 @@ export default function ProfileClient() {
     e.preventDefault();
     setError(null);
     setSuccess(null);
+
+    if (isDemo) {
+      setError('You are in Demo Mode. Password changes are disabled.');
+      return;
+    }
 
     if (!currentPassword || !newPassword || !confirmPassword) {
       setError('Please fill in all fields.');
@@ -82,7 +87,7 @@ export default function ProfileClient() {
               onChange={(e) => setCurrentPassword(e.target.value)}
               className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm placeholder-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               placeholder="••••••••"
-              disabled={loading}
+              disabled={loading || isDemo}
             />
           </div>
 
@@ -97,7 +102,7 @@ export default function ProfileClient() {
               onChange={(e) => setNewPassword(e.target.value)}
               className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm placeholder-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               placeholder="Min. 6 characters"
-              disabled={loading}
+              disabled={loading || isDemo}
             />
           </div>
 
@@ -112,16 +117,16 @@ export default function ProfileClient() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm placeholder-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               placeholder="Confirm new password"
-              disabled={loading}
+              disabled={loading || isDemo}
             />
           </div>
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || isDemo}
             className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Changing...' : 'Update Password'}
+            {loading ? 'Changing...' : isDemo ? 'Update Disabled (Demo)' : 'Update Password'}
           </button>
         </form>
       </div>

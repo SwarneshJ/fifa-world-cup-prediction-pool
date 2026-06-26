@@ -62,6 +62,15 @@
       "isAdmin": false,
       "hasSpecialPrivilege": true,
       "specialPrivilegeUsed": false
+    },
+    {
+      "id": 8,
+      "username": "demo",
+      "name": "Demo User",
+      "password": "$2b$10$O2A6KGhbTUKVSvByT6.90u2siGFmzsABmphZ0p1hs8sYfmIVI7r7G",
+      "isAdmin": false,
+      "hasSpecialPrivilege": false,
+      "specialPrivilegeUsed": false
     }
   ],
   "matches": [
@@ -521,10 +530,10 @@
       "awayTeam": "Haiti",
       "kickoffAt": "2026-06-20T01:00:00.000Z",
       "venue": "Lincoln Financial Field, Philadelphia",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null,
-      "finished": false,
+      "homeScore": 3,
+      "awayScore": 0,
+      "winner": "home",
+      "finished": true,
       "isLockedManually": false,
       "isAnonymous": false,
       "anonymityRequested": false
@@ -537,10 +546,10 @@
       "awayTeam": "Morocco",
       "kickoffAt": "2026-06-19T22:00:00.000Z",
       "venue": "Gillette Stadium, Boston (Foxborough)",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null,
-      "finished": false,
+      "homeScore": 0,
+      "awayScore": 1,
+      "winner": "away",
+      "finished": true,
       "isLockedManually": false,
       "isAnonymous": false,
       "anonymityRequested": false
@@ -553,10 +562,10 @@
       "awayTeam": "Australia",
       "kickoffAt": "2026-06-19T19:00:00.000Z",
       "venue": "Lumen Field, Seattle",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null,
-      "finished": false,
+      "homeScore": 2,
+      "awayScore": 0,
+      "winner": "home",
+      "finished": true,
       "isLockedManually": false,
       "isAnonymous": false,
       "anonymityRequested": false
@@ -569,10 +578,10 @@
       "awayTeam": "Paraguay",
       "kickoffAt": "2026-06-20T03:00:00.000Z",
       "venue": "Levi's Stadium, San Francisco Bay Area (Santa Clara)",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null,
-      "finished": false,
+      "homeScore": 0,
+      "awayScore": 1,
+      "winner": "away",
+      "finished": true,
       "isLockedManually": false,
       "isAnonymous": false,
       "anonymityRequested": false
@@ -3678,6 +3687,7 @@
   ],
   "settings": {
     "anonymous_mode": "false",
-    "exact_score_bonus": "false"
+    "exact_score_bonus": "false",
+    "last_sync_time": "1781987262005"
   }
 }
